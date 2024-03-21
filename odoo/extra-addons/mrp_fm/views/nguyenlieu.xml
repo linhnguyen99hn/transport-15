@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="dm_nguyenlieu_form_view" model="ir.ui.view">
+        <field name="name">dm.nguyenlieu.form</field>
+        <field name="model">nguyen.lieu</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <field name="manguyenlieu"/>
+                        <field name="tennguyenlieu"/>
+                        <field name="nhua"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="nhomnguyenlieu"/>
+                            <field name="donvitinh"/>
+                            <!--                            <field name="dongia"/>-->
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="dm_nguyenlieu_search_view" model="ir.ui.view">
+        <field name="name">dm.nguyenlieu.search</field>
+        <field name="model">nguyen.lieu</field>
+        <field name="arch" type="xml">
+            <search string="Nguyên liệu">
+                <field name="manguyenlieu"/>
+                <field name="tennguyenlieu"/>
+                <field name="nhomnguyenlieu"/>
+                <!--                <field name="dongia"/>-->
+            </search>
+        </field>
+    </record>
+
+    <record id="dm_nguyenlieu_list_view" model="ir.ui.view">
+        <field name="name">dm.nguyenlieu.list</field>
+        <field name="model">nguyen.lieu</field>
+        <field name="arch" type="xml">
+            <tree string="Nhóm nguyên liệu">
+                <field name="manguyenlieu" optional="show"/>
+                <field name="tennguyenlieu" optional="show"/>
+                <field name="nhomnguyenlieu" optional="show"/>
+                <field name="donvitinh" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    action-->
+    <record id="action_dm_nguyenlieu_form" model="ir.actions.act_window">
+        <field name="name">Danh mục nguyên liệu</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nguyen.lieu</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="dm_nguyenlieu_search_view"/>
+        <field name="view_id" ref="dm_nguyenlieu_list_view"/>
+    </record>
+
+    <!--    menu-->
+    <menuitem id="dm_nguyenlieu_menu"
+              action="action_dm_nguyenlieu_form"
+              name="Danh mục nguyên liệu"
+              parent="danh_muc_menu_root"
+              sequence="4"/>
+</odoo>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Views -->
+    <record id="dm_nhomquycach_list_view" model="ir.ui.view">
+        <field name="name">dm.nhomquycach.list</field>
+        <field name="model">dm.nhomquycach</field>
+        <field name="arch" type="xml">
+            <tree string="Quy cách">
+                <field name="manhom" optional="show"/>
+                <field name="tennhom" optional="show"/>
+                <field name="mota" optional="show"/>
+            </tree>
+        </field>
+    </record>
+    <record id="dm_nhomquycach_form_view" model="ir.ui.view">
+        <field name="name">dm.nhomquycach.form</field>
+        <field name="model">dm.nhomquycach</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <field name="manhom"/>
+                        <field name="tennhom"/>
+                    </group>
+                    <group>
+                        <field name="mota" widget="text"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="dm_quycach_form_view" model="ir.ui.view">
+        <field name="name">dm.quycach.form</field>
+        <field name="model">dm.quycach</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <field name="maquycach"/>
+                        <field name="tenquycach"/>
+                        <field name="nhomquycach"/>
+                    </group>
+                    <group>
+                        <field name="mota" widget="text"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="dm_quycach_search_view" model="ir.ui.view">
+        <field name="name">dm.quycach.search</field>
+        <field name="model">dm.quycach</field>
+        <field name="arch" type="xml">
+            <search string="Quy cách">
+                <field name="maquycach"/>
+                <field name="tenquycach"/>
+                <field name="nhomquycach"/>
+<!--                <group expand="0" string="Group By">-->
+<!--                    <filter string="Nhóm quy cách" name="department" context="{'group_by': 'department'}"/>-->
+<!--                </group>-->
+            </search>
+        </field>
+    </record>
+
+    <record id="dm_quycach_list_view" model="ir.ui.view">
+        <field name="name">dm.quycach.list</field>
+        <field name="model">dm.quycach</field>
+        <field name="arch" type="xml">
+            <tree string="Quy cách">
+                <field name="maquycach" optional="show"/>
+                <field name="tenquycach" optional="show"/>
+                <field name="nhomquycach" optional="show"/>
+                <field name="mota" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Actions -->
+    <!-- Actions Quy cách-->
+    <record id="action_dm_quycach_form" model="ir.actions.act_window">
+        <field name="name">Danh mục quy cách</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">dm.quycach</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="dm_quycach_search_view"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('dm_quycach_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('dm_quycach_form_view')})]"/>
+    </record>
+
+    <record id="action_dm_nhomquycach_form" model="ir.actions.act_window">
+        <field name="name">Danh mục nhóm quy cách</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">dm.nhomquycach</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_id" ref="dm_nhomquycach_list_view"/>
+    </record>
+
+
+    <!-- Top menu item -->
+    <menuitem id="dm_quycach_menu"
+              action="action_dm_quycach_form"
+              name="Danh mục quy cách"
+              parent="danh_muc_menu_root"
+              sequence="2"/>
+
+    <menuitem id="dm_nhomquycach_menu"
+              action="action_dm_nhomquycach_form"
+              name="Danh mục nhóm quy cách"
+              parent="danh_muc_menu_root"
+              sequence="2"/>
+
+</odoo>

@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="lenh_xuat_nguyen_vat_lieu_document">
+        <t t-call="web.html_container">
+            <t t-call="web.report_layout" class="container-fluid p-0">
+                <meta charset="utf-8"/>
+                <link rel="stylesheet" href="/base_inheritance/static/src/css/style.css"/>
+                <style>
+                    @page {
+                        size: A4 portrait;
+                        margin: 20mm 10mm 20mm 10mm; /* Điều chỉnh lề trang */
+                    }
+
+                    body {
+                        font-size: 10pt;
+                    }
+
+                    @media only screen and (max-width: 576px) {
+                        .responsive .table {
+                            font-size: smaller;
+                            white-space: nowrap;
+                        }
+
+                        .responsive-1 .responsive-table-1 {
+                            white-space: nowrap;
+                            font-size: smaller;
+                            white-space: nowrap;
+                            min-width: 100%;
+                        }
+
+                        .responsive-table-4 {
+                            font-size: smaller;
+                            white-space: nowrap;
+                            font-size: smaller;
+                            min-width: 800px;
+                        }
+                    }
+
+                    @media only screen and (max-width: 800px) {
+                        .responsive table {
+                            font-size: smaller;
+                            white-space: nowrap;
+                        }
+
+                        .responsive-1 .responsive-table-1 {
+                            white-space: nowrap;
+                            font-size: smaller;
+                            min-width: 100%;
+                        }
+
+                        .responsive-table-4 {
+                            font-size: smaller;
+                            white-space: nowrap;
+                            font-size: smaller;
+                            min-width: 800px;
+                        }
+                    }
+
+                    @media only screen and (max-width: 990px) {
+                        .responsive table {
+                            font-size: smaller;
+                            white-space: nowrap;
+                        }
+
+                        .responsive-1 responsive-table-1 {
+                            white-space: nowrap;
+                            font-size: smaller;
+                            min-width: 100%;
+                        }
+
+                        .responsive-table-4 {
+                            font-size: smaller;
+                            white-space: nowrap;
+                            font-size: smaller;
+                            width: 100%;
+                        }
+                    }
+
+                    @media only screen and (max-width: 1200px) {
+                        .responsive table {
+                            font-size: smaller;
+                        }
+
+                        .responsive-table-4 {
+                            font-size: smaller;
+                            white-space: nowrap;
+                            font-size: smaller;
+                            width: 100%;
+                        }
+                    }
+
+                    @media only screen and (min-width: 1200px) {
+                        .responsive table {
+                            font-size: smaller;
+                        }
+
+                        .responsive-1 .responsive-table-1 {
+                            font-size: smaller;
+                            white-space: nowrap;
+                            font-size: smaller;
+                            width: 100%;
+                        }
+                    }
+
+                    tr, td, th {
+                        page-break-inside: auto;
+                    }
+                </style>
+                <t t-call="web.basic_layout">
+                    <div class="page p-0"
+                         style="font-family :Time New Roman !important;margin-right:4%; margin-left:4%;">
+                        <div class="oe_structure"/>
+                        <div class="col-sm-12 col-md-12 p-0">
+                            <h2 style="width:100%; text-align:center; font-weight: bold; font-size: 30px; text-transform: uppercase; margin: 25px 0px;"
+                            >
+                                <h1 style="text-align: center">LỆNH XUẤT NGUYÊN VẬT LIỆU</h1>
+                            </h2>
+                        </div>
+                        <div>
+                            <t t-set="nguyenlieu" t-value="0"/>
+                            <t t-set="premix" t-value="0"/>
+                            <t t-set="thanhphamnhanduoc" t-value="0"/>
+
+                            <t t-foreach="docs1" t-as="l">
+                                <t t-if="l.nhua == False">
+                                    <t t-set="nguyenlieu"
+                                       t-value="nguyenlieu +l.khoiluong * soluongme"/>
+                                </t>
+                                <t t-if="l.nhua == True">
+                                    <t t-set="nguyenlieu"
+                                       t-value="nguyenlieu + l.sobaonguyen * 25 * tongmesx"/>
+                                </t>
+                            </t>
+                            <t t-foreach="docs3" t-as="m">
+                                <t t-if="m.nhua == False">
+                                    <t t-set="premix"
+                                       t-value="premix + m.khoiluong * soluongme"/>
+                                </t>
+                                <t t-if="m.nhua == True">
+                                    <t t-set="premix"
+                                       t-value="premix + m.khoiluong * soluongme - (m.sobaonguyen * 25 * tongmesx)"/>
+                                </t>
+                            </t>
+                            <t t-set="thanhphamnhanduoc" t-value="nguyenlieu + premix"/>
+                            <t t-if="chaylai">
+                                <t t-set="thanhphamnhanduoc"
+                                   t-value="thanhphamnhanduoc + khoiluong1mechaylai"/>
+                            </t>
+                            <div class="table-responsive-sm table-responsive-md">
+                                <table class="responsive-table-4"
+                                       style="table-layout: fixed; font-family : Time New Roman; margin: 30px 0px;  width: 100%;">
+                                    <tr>
+                                        <th style="width:25%; text-align:left;">
+                                            <span class="text-center bold">
+                                                <strong>Lệnh sản xuất số:
+                                                    <t
+                                                            t-esc="lenhsx"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                        <th style="width:25%; text-align:left;">
+                                            <span class="text-center bold">
+                                                <strong>Tem sản phẩm:
+                                                    <t
+                                                            t-esc="matemsp"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                        <th style="width:25%; text-align:left;">
+                                            <span class="text-center bold">
+                                                <strong>Mã sản xuất:
+                                                    <t
+                                                            t-esc="manoibo"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:25%; text-align:left;">
+                                            <span class="text-center bold">
+                                                <strong>Bộ phận xuất:
+                                                    <t
+                                                            t-esc="bophanxuat"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                        <th style="width:25%; text-align:left;">
+                                            <span class="text-center bold">
+                                                <strong>Lý do xuất:
+                                                    <t
+                                                            t-esc="lydoxuat"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                        <th style="width:25%; text-align:left;">
+                                            <span class="text-center bold">
+                                                <strong>Bộ phận nhập:
+                                                    <t
+                                                            t-esc="bophannhap"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:25%; text-align:left;">
+                                            <span class="text-center bold">
+                                                <strong>Hợp đồng số:
+                                                    <t
+                                                            t-esc="sohopdong"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                        <th style="width:25%; text-align:left;">
+                                            <span class="text-center bold">
+                                                <strong>Ngày xuất thực tế:
+                                                    <t
+                                                            t-esc="ngayxuatthucte"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                        <th style="width:25%; text-align:left;">
+                                            <span class="text-center bold">
+                                                <strong>Ngày xuất kế hoạch:
+                                                    <t
+                                                            t-esc="ngayxuatkehoach"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:25%; text-align:left;">
+                                            <span class="text-center bold">
+                                                <strong>Tổng số mẻ:
+                                                    <t
+                                                            t-esc="soluongme"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                        <th style="width:25%; text-align:left;">
+                                            <span class="text-center bold">
+                                                <strong>Khối lượng một mẻ:
+                                                    <t
+                                                            t-esc="khoiluongmotme"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                        <th style="width:25%; text-align:left;">
+                                            <span class="text-center bold">
+                                                <strong>TP nhận được:
+                                                    <t
+                                                            t-esc="'{0:,.2f}'.format(thanhphamnhanduoc/(1 + haohut/100)).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <left>
+                                <h3 style="margin: 20px 0px;">I. Xuất nguyên liệu</h3>
+                            </left>
+                            <div class="table-responsive-sm table-responsive-md responsive-1">
+                                <table class="table-bordered responsive-table-1"
+                                       style="border-collapse: collapse; font-size: 15px">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2"
+                                                style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">STT.
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Mã nguyên liệu
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Tên nguyên liệu
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">ĐVT
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">SL kế hoạch
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Số kg/mẻ
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">SL thực tế
+                                            </th>
+                                            <th colspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Lần cấp nguyên liệu
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Cấp lần 1
+                                            </th>
+                                            <th style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Cấp lần 2
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="sale_tbody" style="font-size: 14px">
+                                        <t t-set="tongkhoiluong" t-value="0"/>
+                                        <t t-set="tongnvl1me" t-value="0"/>
+                                        <t t-foreach="docs1" t-as="o">
+                                            <tr>
+                                                <td class="text-center"
+                                                    style="text-align: center;padding : 1px;border: 1px solid black;">
+                                                    <span t-esc="o.stt"/>
+                                                    <!--                                                        <t t-set="i" t-value="i+1"/>-->
+                                                </td>
+                                                <td class="text-left"
+                                                    style="text-align: left;padding : 1px;border: 1px solid black;">
+                                                    <span t-field="o.manguyenlieu"/>
+                                                </td>
+                                                <td class="text-left"
+                                                    style="text-align: left;padding : 1px;border: 1px solid black;">
+                                                    <span t-field="o.tennguyenlieu"/>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: center;padding : 1px;border: 1px solid black;">
+                                                    <span t-field="o.donvitinh"/>
+                                                </td>
+                                                <t t-if="o.nhua == False">
+                                                    <td class="text-right"
+                                                        style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                        <span t-esc="o.khoiluong * soluongme"
+                                                              t-options='{"widget": "float", "precision": 2 }'/>
+                                                    </td>
+                                                    <t t-set="tongkhoiluong"
+                                                       t-value="tongkhoiluong + o.khoiluong * soluongme"
+                                                       t-options='{"widget": "float", "precision": 2 }'/>
+                                                </t>
+                                                <t t-if="o.nhua == True">
+                                                    <td class="text-right"
+                                                        style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                        <span t-esc="o.sobaonguyen * 25 * tongmesx"
+                                                              t-options='{"widget": "float", "precision": 2 }'/>
+                                                    </td>
+                                                    <t t-set="tongkhoiluong"
+                                                       t-value="tongkhoiluong + o.sobaonguyen * 25 * tongmesx"
+                                                       t-options='{"widget": "float", "precision": 2 }'/>
+                                                </t>
+
+                                                <t t-if="o.nhua == False">
+                                                    <td class="text-right"
+                                                        style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                        <span t-esc="o.khoiluong"/>
+                                                    </td>
+                                                    <t t-set="tongnvl1me"
+                                                       t-value="tongnvl1me + o.khoiluong"/>
+                                                </t>
+                                                <t t-if="o.nhua == True">
+                                                    <td class="text-right"
+                                                        style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                        <span t-esc="o.sobaonguyen * 25"/>
+                                                    </td>
+                                                    <t t-set="tongnvl1me"
+                                                       t-value="tongnvl1me + o.sobaonguyen * 25"
+                                                       t-options='{"widget": "float", "precision": 2 }'/>
+                                                </t>
+
+                                                <td class="text-right"
+                                                    style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <!--                                                    <span t-esc="'{0:,.1f}'.format(o.soluongthucte).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>-->
+                                                </td>
+                                                <td class="text-right"
+                                                    style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <!--                                                    <span t-esc="'{0:,.1f}'.format(o.caplan_1).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>-->
+                                                </td>
+                                                <td class="text-right"
+                                                    style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <!--                                                    <span t-esc="'{0:,.1f}'.format(o.caplan_2).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>-->
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="chaylai">
+                                            <t t-set="tongkhoiluong"
+                                               t-value="tongkhoiluong + khoiluong1mechaylai"/>
+                                            <!--                                                <t t-set="tongnvl1me" t-value="tongnvl1me + khoiluong1mechaylai"/>-->
+                                            <tr>
+                                                <td style="text-align: center;padding : 1px;border: 1px solid black;">
+                                                    <span t-esc="i"/>
+                                                    <t t-set="i"/>
+                                                </td>
+                                                <td style="text-align: right;padding : 4px;border: 1px solid black;"></td>
+                                                <td style="text-align: left;padding : 1px;border: 1px solid black;">
+                                                    <span t-esc="thanhphamchaylai"/>
+                                                </td>
+                                                <!--                                                    <td style="text-align: right;padding : 1px;border: 1px solid black;">-->
+                                                <!--                                                        <span/>-->
+                                                <!--                                                    </td>-->
+                                                <td style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <span/>
+                                                </td>
+                                                <td style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <span t-esc="khoiluong1mechaylai"
+                                                          t-options='{"widget": "float", "precision": 2 }'/>
+                                                </td>
+                                                <td style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <!--                                                        <span t-esc="khoiluong1mechaylai"/>-->
+                                                </td>
+                                                <td style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <span/>
+                                                </td>
+                                                <td style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <span/>
+                                                </td>
+                                                <td style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <span/>
+                                                </td>
+                                            </tr>
+                                        </t>
+
+                                        <tr style="background-color: white">
+                                            <td class="text-center"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <span/>
+                                            </td>
+                                            <td style="text-align: right;padding : 4px;border: 1px solid black;"></td>
+                                            <td class="text-left"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <strong>
+                                                    <span>Tổng khối lượng</span>
+                                                </strong>
+                                            </td>
+                                            <td class="text-center"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <span/>
+                                            </td>
+                                            <td class="text-right"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <strong>
+                                                    <span
+                                                            t-esc="tongkhoiluong"
+                                                            t-options='{"widget": "float", "precision": 2 }'/>
+                                                </strong>
+                                            </td>
+                                            <td class="text-right"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <strong>
+                                                    <span
+                                                            t-esc="tongnvl1me"
+                                                            t-options='{"widget": "float", "precision": 2 }'/>
+                                                </strong>
+                                            </td>
+                                            <td class="text-center"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <span/>
+                                            </td>
+                                            <td class="text-center"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <span/>
+                                            </td>
+                                            <td class="text-center"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <span/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <left>
+                                <h3 style="margin: 20px 0px;">II. Xuất vật tư</h3>
+                            </left>
+                            <div class="table-responsive-sm table-responsive-md responsive-1">
+                                <table class="table-bordered responsive-table-1"
+                                       style="border-collapse: collapse; font-size: 15px">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2"
+                                                style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">STT.
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Mã vật tư
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Tên vật tư
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">ĐVT
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">SL kế hoạch
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">SL thực tế
+                                            </th>
+                                            <th colspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Lần cấp vật tư
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Cấp lần 1
+                                            </th>
+                                            <th style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Cấp lần 2
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="sale_tbody" style="font-size: 14px">
+                                        <t t-set="i" t-value="1"/>
+                                        <t t-foreach="docs2" t-as="o">
+                                            <tr>
+                                                <td class="text-center"
+                                                    style="text-align: center;padding : 1px;border: 1px solid black;">
+                                                    <span t-esc="i"/>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </td>
+                                                <td class="text-left"
+                                                    style="text-align: left;padding : 1px;border: 1px solid black;">
+                                                    <span t-field="o.manguyenlieu"/>
+                                                </td>
+                                                <td class="text-left"
+                                                    style="text-align: left;padding : 1px;border: 1px solid black;">
+                                                    <span t-field="o.tennguyenlieu"/>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: center;padding : 1px;border: 1px solid black;">
+                                                    <span t-field="o.donvitinh"/>
+                                                </td>
+                                                <td class="text-right"
+                                                    style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <span t-esc="'{0:,.1f}'.format(o.soluongkehoach).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                                </td>
+                                                <td class="text-right"
+                                                    style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <!--                                                    <span t-esc="'{0:,.1f}'.format(o.soluongthucte).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>-->
+                                                </td>
+                                                <td class="text-right"
+                                                    style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <!--                                                    <span t-esc="'{0:,.1f}'.format(o.caplan_1).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>-->
+                                                </td>
+                                                <td class="text-right"
+                                                    style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <!--                                                    <span t-esc="'{0:,.1f}'.format(o.caplan_2).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>-->
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <left>
+                                <h3 style="margin: 20px 0px;">III. Xuất premix</h3>
+                            </left>
+                            <div class="table-responsive-sm table-responsive-md responsive-1">
+                                <table class="table-bordered responsive-table-1"
+                                       style="border-collapse: collapse; font-size: 15px">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2"
+                                                style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">STT.
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Mã nguyên liệu
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Tên Premix cấp
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">ĐVT
+                                            </th>
+                                            <th colspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">SL kế hoạch
+                                            </th>
+                                            <th colspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">SL thực tế
+                                            </th>
+                                            <th rowspan="2"
+                                                style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;width:20%;"
+                                                class="text-center">Ghi chú
+                                            </th>
+
+                                        </tr>
+                                        <tr>
+
+                                            <th style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Khối lượng
+                                            </th>
+                                            <th style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Số kg/mẻ
+                                            </th>
+                                            <th style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Khối lượng
+                                            </th>
+                                            <th style="background-color: white; color: black; border: 1px solid black; padding : 1px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Số kg/mẻ
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody class="sale_tbody" style="font-size: 14px">
+                                        <t t-set="i" t-value="1"/>
+                                        <t t-set="tongkhoiluong1" t-value="0"/>
+                                        <t t-set="tongnvl1me1" t-value="0"/>
+                                        <t t-foreach="docs3" t-as="o">
+                                            <tr>
+                                                <td class="text-center"
+                                                    style="text-align: center;padding : 1px;border: 1px solid black;">
+                                                    <span t-esc="i"/>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </td>
+                                                <td class="text-left"
+                                                    style="text-align: left;padding : 1px;border: 1px solid black;">
+                                                    <span t-field="o.manguyenlieu"/>
+                                                </td>
+                                                <td class="text-left"
+                                                    style="text-align: left;padding : 1px;border: 1px solid black;">
+                                                    <!--                                                        <span t-field="o.tennguyenlieu"/>-->
+                                                    <span t-esc="str(o.premix) + '-' + str(mamay) + '.' +  str(o.stt)"/>
+                                                </td>
+                                                <!--                                                    <td class="text-left"-->
+                                                <!--                                                        style="text-align: left;padding : 1px;border: 1px solid black;">-->
+                                                <!--                                                        <span t-field="o.manguyenlieu"/>-->
+                                                <!--                                                    </td>-->
+                                                <td class="text-center"
+                                                    style="text-align: center;padding : 1px;border: 1px solid black;">
+                                                    <span t-field="o.donvitinh"/>
+                                                </td>
+                                                <t t-if="o.nhua == False">
+                                                    <td class="text-right"
+                                                        style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                        <span t-esc="o.khoiluong * soluongme"
+                                                              t-options='{"widget": "float", "precision": 2 }'/>
+                                                    </td>
+                                                    <t t-set="tongkhoiluong1"
+                                                       t-value="tongkhoiluong1 + o.khoiluong * soluongme"/>
+                                                </t>
+                                                <t t-if="o.nhua == True">
+                                                    <td class="text-right"
+                                                        style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                        <span t-esc="o.khoiluong * soluongme - (o.sobaonguyen * 25 * tongmesx)"
+                                                              t-options='{"widget": "float", "precision": 2 }'/>
+                                                    </td>
+                                                    <t t-set="tongkhoiluong1"
+                                                       t-value="tongkhoiluong1 + o.khoiluong * soluongme - (o.sobaonguyen * 25 * tongmesx)"/>
+                                                </t>
+                                                <t t-if="o.nhua == False">
+                                                    <td class="text-right"
+                                                        style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                        <span t-esc="o.khoiluong"
+                                                              t-options='{"widget": "float", "precision": 2 }'/>
+                                                    </td>
+                                                    <t t-set="tongnvl1me1"
+                                                       t-value="tongnvl1me1 + o.khoiluong"/>
+                                                </t>
+                                                <t t-if="o.nhua == True">
+                                                    <td class="text-right"
+                                                        style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                        <span t-esc="o.khoiluong - o.sobaonguyen * 25"
+                                                              t-options='{"widget": "float", "precision": 2 }'/>
+                                                    </td>
+                                                    <t t-set="tongnvl1me1"
+                                                       t-value="tongnvl1me1 + o.khoiluong - o.sobaonguyen * 25"/>
+                                                </t>
+                                                <td class="text-right"
+                                                    style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <!--                                                    <span t-esc="'{0:,.1f}'.format(o.caplan_1).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>-->
+                                                </td>
+                                                <td class="text-right"
+                                                    style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <!--                                                    <span t-esc="'{0:,.1f}'.format(o.caplan_2).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>-->
+                                                </td>
+                                                <td class="text-right"
+                                                    style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                    <!--                                                    <span t-esc="'{0:,.1f}'.format(o.caplan_2).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>-->
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <tr style="background-color : white">
+                                            <td class="text-center"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <span/>
+                                            </td>
+                                            <td style="text-align: right;padding : 4px;border: 1px solid black;"></td>
+                                            <td class="text-left"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <strong>
+                                                    <span>Tổng khối lượng</span>
+                                                </strong>
+                                            </td>
+                                            <td class="text-center"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <span/>
+                                            </td>
+                                            <td class="text-right"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <strong>
+                                                    <span
+                                                            t-esc="tongkhoiluong1"
+                                                            t-options='{"widget": "float", "precision": 2 }'/>
+                                                </strong>
+                                            </td>
+                                            <td style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <strong>
+                                                    <span
+                                                            t-esc="tongnvl1me1"
+                                                            t-options='{"widget": "float", "precision": 2 }'/>
+                                                </strong>
+                                            </td>
+                                            <td class="text-center"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <span/>
+                                            </td>
+                                            <td class="text-center"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <span/>
+                                            </td>
+                                            <td class="text-center"
+                                                style="text-align: right;padding : 1px;border: 1px solid black;">
+                                                <span/>
+                                            </td>
+                                            <!--                                                <td class="text-center"-->
+                                            <!--                                                    style="text-align: right;padding : 1px;border: 1px solid black;">-->
+                                            <!--                                                    <span/>-->
+                                            <!--                                                </td>-->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="table-responsive-sm table-responsive-md" style="font-size: 12px">
+                            <table class="responsive-table-4"
+                                   style="table-layout: fixed; font-family : Time New Roman; margin: 30px 0px;  width: 100%;">
+                                <tr>
+                                    <th style="text-align:center;">
+                                        <span>
+                                            Người lập
+                                        </span>
+                                        <br/>
+                                        <span>
+                                            (ký, họ tên)
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <span t-esc="parameters['tennguoilap']"/>
+                                    </th>
+                                    <th style="text-align:center;">
+                                        <span t-esc="parameters['tpsanxuat']"/>
+                                        <br/>
+                                        <span>
+                                            (ký, họ tên)
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <span t-esc="parameters['tentpsanxuat']"/>
+                                    </th>
+                                    <th style="text-align:center;">
+                                        <span t-esc="parameters['gdcongnghe']"/>
+                                        <br/>
+                                        <span>
+                                            (ký, họ tên)
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <span t-esc="parameters['tengdcongnghe']"/>
+                                    </th>
+                                    <th style="text-align:center;">
+                                        <span t-esc="parameters['ketoan']"/>
+                                        <br/>
+                                        <span>
+                                            (ký, họ tên)
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <span t-esc="parameters['tenketoan']"/>
+                                    </th>
+
+                                    <th style="text-align:center;">
+                                        <span t-esc="parameters['gdsanxuat']"/>
+                                        <br/>
+                                        <span>
+                                            (ký, họ tên)
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <span t-esc="parameters['tengdsanxuat']"/>
+                                    </th>
+                                    <th style="text-align:center;">
+                                        <span t-esc="parameters['tonggiamdoc']"/>
+                                        <br/>
+                                        <span>
+                                            (ký, họ tên)
+                                        </span>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <span t-esc="parameters['tentonggiamdoc']"/>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="oe_structure"/>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

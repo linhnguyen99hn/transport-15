@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+       <record id="quy_cach_dong_goi_va_hoan_thien_view" model="ir.ui.view">
+        <field name="name">quy.cach.dong.goi.va.hoan.thien.wizard.form</field>
+        <field name="model">quy.cach.dong.goi.va.hoan.thien.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Lệnh quy cách đóng dói và hoàn thiện" create="false">
+                <sheet>
+                    <div class="row no-gutters">
+                        <div class="col-sm-12 col-md-4 offset-md-1 col-xl-4 offset-xl-1 d-none d-sm-block">
+                            <div class="d-flex justify-content-center align-items-center" style="width: 100%; padding: 0px 20px; height: 100%; display: flex; align-items: center;justify-content: center;">
+                                <img src="/web/binary/company_logo" alt="Logo" class="rounded img-fluid" style="width: 100%; padding: 0px 20px;"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-xl-4" style="padding: 20px 0px;">
+                            <h3 class="text-center" style="padding-bottom: 15px;">Quy Cách Đóng Gói và Hoàn Thiện</h3>
+                            <div class="form-group">
+                                <label for="lenhsx" string="Chọn Lệnh Xuất Số:" class="o_light_label"
+                                       style="font-size: 16px; margin-bottom: 5px;"/>
+                                <field name="lenhsx" class="form-control" style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group" style="margin-top: 10px;">
+                                <button name="get_report" type="object" string="Lập lệnh quy cách"
+                                        class="btn btn-primary"/>
+                                <button style="margin-left: 10px;" string="Hủy" special="cancel"
+                                        class="btn btn-secondary"/>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="quy_cach_dong_goi_va_hoan_thien_form" model="ir.actions.act_window">
+        <field name="name">Quy cách đóng gói và hoàn thiện</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">quy.cach.dong.goi.va.hoan.thien.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="quy_cach_dong_goi_va_hoan_thien_view"/>
+    </record>
+
+    <menuitem id="qc_dong_goi_va_hoan_thien_menu"
+              action="quy_cach_dong_goi_va_hoan_thien_form"
+              name="Quy cách đóng gói và hoàn thiện"
+              parent="lenh_sx_menu_root"
+              sequence="6"/>
+
+    <data>
+        <record id="mrp_fm.quy_cach_dong_goi_va_hoan_thien" model="ir.actions.report">
+            <field name="name">Quy cách đóng gói và hoàn thiện</field>
+            <field name="model">quy.cach.dong.goi.va.hoan.thien.wizard</field>
+            <field name="report_type">qweb-html</field>
+            <field name="paperformat_id" ref="fm_paper_format" />
+            <field name="report_name">mrp_fm.quy_cach_dong_goi_va_hoan_thien_document</field>
+            <field name="report_file">mrp_fm.quy_cach_dong_goi_va_hoan_thien_document</field>
+            <field name="print_report_name">Quy cách đóng gói và hoàn thiện</field>
+            <field name="binding_model_id" ref="mrp_fm.model_report_mrp_fm_quy_cach_dong_goi_va_hoan_thien_document"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

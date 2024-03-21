@@ -1,0 +1,28 @@
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    margin-right: 10px;
+}
+
+.center-button {
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.btn-primary.margin{
+    left: -10px;
+    right: 10px;
+}
+
+.Responsive:{
+    background-color: red;
+}
+
+@media only screen and (min-width: 800px) {
+    .Responsive:{
+        display: block;
+    }
+}

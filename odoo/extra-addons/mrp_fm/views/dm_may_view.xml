@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Views -->
+    <record id="congsuat_may_form_view" model="ir.ui.view">
+        <field name="name">congsuat.may.form</field>
+        <field name="model">congsuat.may</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="congsuat"/>
+                        </group>
+                        <group>
+                            <field name="mota"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="may_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="sanpham_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="congsuat_may_list_view" model="ir.ui.view">
+        <field name="name">congsuat.may.list</field>
+        <field name="model">congsuat.may</field>
+        <field name="arch" type="xml">
+            <tree string="Công suất máy">
+                <field name="congsuat" optional="show"/>
+                <field name="may_ids" widget="many2many_tags" optional="show"/>
+                <field name="sanpham_ids" widget="many2many_tags" optional="show"/>
+                <field name="mota" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="dm_may_form_view" model="ir.ui.view">
+        <field name="name">dm.may.form</field>
+        <field name="model">dm.may</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="mamay"/>
+                            <field name="tenmay"/>
+                        </group>
+                        <group>
+                            <field name="tinhtrang"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="mota" widget="text"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="dm_may_search_view" model="ir.ui.view">
+        <field name="name">dm.may.search</field>
+        <field name="model">dm.may</field>
+        <field name="arch" type="xml">
+            <search string="Máy">
+                <field name="mamay"/>
+                <field name="tenmay"/>
+                <field name="mota"/>
+                <field name="tinhtrang"/>
+                <!--                <group expand="0" string="Group By">-->
+                <!--                    <filter string="Nhóm quy cách" name="department" context="{'group_by': 'department'}"/>-->
+                <!--                </group>-->
+            </search>
+        </field>
+    </record>
+
+    <record id="dm_may_list_view" model="ir.ui.view">
+        <field name="name">dm.may.list</field>
+        <field name="model">dm.may</field>
+        <field name="arch" type="xml">
+            <tree string="Máy">
+                <field name="mamay" optional="show"/>
+                <field name="tenmay" optional="show"/>
+                <field name="mota" optional="show"/>
+                <field name="tinhtrang" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Actions -->
+    <!-- Actions Quy cách-->
+    <record id="action_dm_may_form" model="ir.actions.act_window">
+        <field name="name">Máy</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">dm.may</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="dm_may_search_view"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('dm_may_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('dm_may_form_view')})]"/>
+    </record>
+    <record id="action_congsuat_may_form" model="ir.actions.act_window">
+        <field name="name">Công suất máy</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">congsuat.may</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <!--        <field name="search_view_id" ref="dm_may_search_view"/>-->
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('congsuat_may_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('congsuat_may_form_view')})]"/>
+    </record>
+
+
+    <!-- Top menu item -->
+    <menuitem id="dm_may_menu"
+              action="action_dm_may_form"
+              name="Danh mục máy"
+              parent="danh_muc_menu_root"
+              sequence="20"/>
+
+    <menuitem id="congsuat_may_menu"
+              action="action_congsuat_may_form"
+              name="Công suất máy"
+              parent="danh_muc_menu_root"
+              sequence="40"/>
+
+
+</odoo>

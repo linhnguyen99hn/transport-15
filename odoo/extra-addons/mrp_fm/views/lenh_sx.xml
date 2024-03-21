@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="lenh_sx_form_view" model="ir.ui.view">
+        <field name="name">lenh.san.xuat.form</field>
+        <field name="model">lenh.san.xuat</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="lenhsx" string="Lệnh Sản Xuất Số" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="lenhsx" class="form-control" style="height: 30px; padding: 5px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="may_id" string="Máy Chạy" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="may_id" class="form-control"
+                                   style="height: 30px; padding: 5px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="matemsp" string="Mã Tem Sản Phẩm" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="matemsp" class="form-control"
+                                   style="height: 30px; padding: 5px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="tongnguyenlieucap" string="Tổng Nguyên Liệu Cấp" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="tongnguyenlieucap" widget="float" class="form-control"
+                                   style="height: 30px; padding: 5px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="tongmesx" string="Tổng Số Mẻ Sản Xuất" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="tongmesx" widget="float" class="form-control"
+                                   style="height: 30px; padding: 5px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="khoiluongme" string="Khối Lương 1 Mẻ" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="khoiluongme" widget="float" class="form-control"
+                                   style="height: 30px; padding: 5px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="tptheoycsx" string="TP Theo YCSX" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="tptheoycsx" widget="float" class="form-control"
+                                   style="height: 30px; padding: 5px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="thanhphamnhanduoc" string="TP nhận được" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="thanhphamnhanduoc" widget="float" class="form-control"
+                                   style="height: 30px; padding: 5px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="haohut" string="Hao Hụt" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="haohut" widget="float" class="form-control"
+                                   style="height: 30px; padding: 5px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="bophannhap" string="Bộ Phận Nhập" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="bophannhap" class="form-control"
+                                   style="height: 30px; padding: 5px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="bophanxuat" string="Bộ Phận Xuất" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="bophanxuat" class="form-control"
+                                   style="height: 30px; padding: 5px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="lydoxuat" string="Lý Do Xuất" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="lydoxuat" class="form-control"
+                                   style="height: 30px; padding: 5px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="ngaycapkehoach" string="Ngày Cấp Kế Hoạch" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="ngaycapkehoach" class="form-control"
+                                   style="height: 0px; padding: 0px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="ngaycapthucte" string="Ngày Cấp Thực Tế" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="ngaycapthucte" class="form-control"
+                                   style="height: 0px; padding: 0px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label for="sohopdong" string="Số hợp đồng" class="o_light_label"
+                                   style="font-size: 12px; margin-bottom: 5px;"/>
+                            <field name="sohopdong" class="form-control"
+                                   style="height: 30px; padding: 5px;"/>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-12 col-lg-12 row no-gutters">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <label for="chaylai" string="Có Thành Phần Chạy Lại" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <field name="chaylai" string="Có Thành Phần Chạy Lại"/>
+                            </div>
+                        </div>
+                    </div>
+                    <group attrs="{'invisible': [('chaylai', '=', False)]}">
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="thanhphamchaylai" string="Thành phẩm chạy lại" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="thanhphamchaylai" class="form-control"
+                                       style="height: 30px; padding: 5px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="khoiluong1mechaylai" string="Khối Lượng 1 Mẻ Thành Phẩm Chạy Lại"
+                                       class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="khoiluong1mechaylai" class="form-control"
+                                       style="height: 30px; padding: 5px;"/>
+                            </div>
+                        </div>
+                    </group>
+                    <notebook>
+                        <page id="kehoach_tab" name="kehoach"
+                              string="Kế hoạch sản xuất">
+                            <field name="kehoach" widget="one2many">
+                                <tree editable="bottom">
+                                    <field name="donhang" optional="show"/>
+                                    <field name="donhangchitiet_id" optional="show"/>
+                                    <field name="masx"/>
+                                    <field name="kh_may_id"/>
+                                    <field name="ngay"/>
+                                    <field name="thoigian_batdau" string="Thời gian băt đầu"/>
+                                    <field name="thoigian_dukien"/>
+                                    <field name="khoiluong_dukien"/>
+                                    <field name="khoiluong_thucte" readonly="True"/>
+                                    <field name="chenhlech"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page id="vattu_tab" name="lenhcapvattu" string="Vật tư sử dụng">
+                            <field name="lenhcapvattu_ids" widget="one2many">
+                                <tree editable="bottom">
+                                    <field name="mavattu" optional="show"/>
+                                    <field name="tenvattu" optional="show"/>
+                                    <field name="donvitinh" optional="show"/>
+                                    <field name="soluongkehoach" optional="show"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <!--                        <page id="premix_tab" name="lenhcappremix" string="Premix">-->
+                        <!--                            <field name="lenhcapnlpremix" widget="one2many">-->
+                        <!--                                <tree editable="bottom">-->
+                        <!--                                    <field name="manguyenlieu" optional="show"/>-->
+                        <!--                                    <field name="tennguyenlieu" optional="show"/>-->
+                        <!--                                    <field name="tile" optional="show"/>-->
+                        <!--                                    <field name="khoiluonglo" optional="show"/>-->
+                        <!--                                    <field name="khoiluongme" optional="show"/>-->
+                        <!--                                    <field name="khoiluongcan" optional="show"/>-->
+                        <!--                                    <field name="khoiluongcancobi" optional="show"/>-->
+                        <!--                                </tree>-->
+                        <!--                            </field>-->
+                        <!--                        </page>-->
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="lenh_sx_search_view" model="ir.ui.view">
+        <field name="name">lenh.san.xuat.search</field>
+        <field name="model">lenh.san.xuat</field>
+        <field name="arch" type="xml">
+            <search string="Lệnh sản xuất">
+                <field name="lenhsx"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="lenh_sx_list_view" model="ir.ui.view">
+        <field name="name">lenh.san.xuat.list</field>
+        <field name="model">lenh.san.xuat</field>
+        <field name="arch" type="xml">
+            <tree string="Lệnh sản xuất">
+                <field name="lenhsx" optional="show"/>
+                <field name="may_id" optional="show"/>
+                <field name="matemsp" optional="show"/>
+                <field name="khoiluongme" optional="show"/>
+                <field name="haohut" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    action-->
+    <record id="action_lenh_sx_form" model="ir.actions.act_window">
+        <field name="name">Lệnh sản xuất</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lenh.san.xuat</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="lenh_sx_search_view"/>
+        <field name="view_id" ref="lenh_sx_list_view"/>
+    </record>
+
+    <!--    menu-->
+    <menuitem id="lenh_sx_menu"
+              action="action_lenh_sx_form"
+              name="Lệnh sản xuất"
+              parent="hoat_dong_menu_root"
+              sequence="3"/>
+</odoo>

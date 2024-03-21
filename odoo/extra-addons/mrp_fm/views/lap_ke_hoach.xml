@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--View-->
+    <record id="thoi_gian_lkh_form_view" model="ir.ui.view">
+        <field name="name">thoi.gian.lkh.form</field>
+        <field name="model">lkh</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_start"/>
+                        </group>
+                        <group>
+                            <field name="date_end"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Lập kế hoạch" type="object" name="xac_nhan_thoi_gian_lapkh" class="btn-primary"/>
+                        <button string="Hủy" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="message_success_lkh_form_view" model="ir.ui.view">
+        <field name="name">message.success.lkh.form</field>
+        <field name="model">lkh</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <footer>
+                    <button string="Đã lập xong kế hoạch sản xuất!" type="object" name="reload_list_view" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

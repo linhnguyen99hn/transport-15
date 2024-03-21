@@ -1,0 +1,12 @@
+<odoo>
+<!--    <template id="gantt_chart_template" inherit_id="web.assets_common">-->
+<!--        <xpath expr="." position="inside">-->
+<!--            <script type="text/javascript" src="/mrp_fm/static/src/js/gantt_chart.js"></script>-->
+<!--        </xpath>-->
+<!--    </template>-->
+    <template id="gantt_chart_template" name="Gantt Chart" inherit_id="web.assets_backend">
+        <xpath expr="//body" position="inside">
+            <div class="o_gantt_chart"></div>
+        </xpath>
+    </template>
+</odoo>

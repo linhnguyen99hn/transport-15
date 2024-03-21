@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <template id="bao_cao_nguyen_lieu_xuat_document">
+        <t t-call="web.html_container">
+            <t t-call="web.report_layout">
+                <link rel="stylesheet" href="/base_inheritance/static/src/css/style.css"/>
+                <meta charset="utf-8"/>
+                <t t-call="web.basic_layout">
+                    <div class="page" style="font-family :Time New Roman !important;margin-right:4%; margin-left:4%;">
+                        <div class="oe_structure"/>
+                        <br/>
+                        <h2 style="width:100%; text-align:center;font-weight: 550;font-size: 40px;text-transform: uppercase;"
+                            class="text-center bold"><center>BÁO CÁO NGUYÊN LIỆU XUẤT</center></h2>
+                        <span class="text-center bold">
+                        </span>
+                    </div>
+                    <div>
+                        <span class="text-center bold">
+                            <center>
+                                <t t-if="tungay">
+                                    <span class="text-center bold"><strong>Từ ngày: <t
+                                            t-esc="tungay"/></strong></span>
+                                </t>
+                                <t t-if="tungay and denngay">
+                                    <span class="text-center bold"><strong> - </strong></span>
+                                </t>
+                                <t t-if="denngay">
+                                    <span class="text-center bold"><strong>Đến ngày: <t
+                                            t-esc="denngay"/></strong></span>
+                                </t>
+                                <t t-if="tennguyenlieu">
+                                    <span class="text-center bold"><strong>Nguyên liệu: <t
+                                            t-esc="tennguyenlieu"/></strong></span>
+                                </t>
+                                <br/>
+                            </center>
+                        </span>
+                        <br/>
+                        <div>
+                            <table class="table-bordered"
+                                   style="border-collapse: collapse; width : 100%; border : border-box;">
+                                <thead>
+                                    <tr>
+                                        <th style="width :3%;background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                            class="table-item">STT</th>
+                                        <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                            class="text-center">Mã nguyên liệu</th>
+                                        <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                            class="text-center">Tên nguyên liệu</th>
+                                        <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                            class="text-center">Đơn vị</th>
+                                        <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                            class="text-center">Khối lượng(Kg)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="sale_tbody">
+                                    <t t-set="i" t-value="1"/>
+                                    <t t-set="l" t-value="0"/>
+                                    <t t-foreach="docs" t-as="o">
+                                        <tr>
+                                            <td class="text-center"
+                                                style="text-align: center;padding : 8px;border: 1px solid black;">
+                                                <span t-esc="i"/>
+                                                <t t-set="i" t-value="i+1"/>
+                                            </td>
+                                            <td class="text-left"
+                                                style="text-align: left;padding : 8px;border: 1px solid black;">
+                                                <span t-field="o.manguyenlieu"/>
+                                            </td>
+                                            <td class="text-left"
+                                                style="text-align: left;padding : 8px;border: 1px solid black;">
+                                                <span t-esc="o.nguyenlieu"/>
+                                            </td>
+                                            <td class="text-center"
+                                                style="text-align: center;padding : 8px;border: 1px solid black;">
+                                                <span t-esc="o.donvitinh"/>
+                                            </td>
+                                            <td class="text-right"
+                                                style="text-align: right;padding : 8px;border: 1px solid black;">
+                                                <span t-esc="'{0:,.3f}'.format(o.khoiluong).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                            </td>
+                                        </tr>
+                                    </t></tbody>
+                            </table>
+                        </div>
+                        <br/><br/>
+                        <div class="oe_structure"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

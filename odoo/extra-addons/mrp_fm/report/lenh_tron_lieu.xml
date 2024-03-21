@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="lenh_tron_lieu_view" model="ir.ui.view">
+        <field name="name">lenh.tron.lieu.wizard.form</field>
+        <field name="model">lenh.tron.lieu.wizard</field>
+        <field name="arch" type="xml">
+            <form string="LỆNH TRỘN LIỆU" create="false">
+                <sheet>
+                    <div class="row no-gutters">
+                        <div class="col-sm-12 col-md-4 offset-md-1 col-xl-4 offset-xl-1 d-none d-sm-block">
+                            <div class="d-flex justify-content-center align-items-center" style="width: 100%; padding: 0px 20px; height: 100%; display: flex; align-items: center;justify-content: center;">
+                                <img src="/web/binary/company_logo" alt="Logo" class="rounded img-fluid" style="width: 100%; padding: 0px 20px;"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-xl-4" style="padding: 20px 0px;">
+                            <h3 class="text-center" style="padding-bottom: 15px;">Lệnh Trộn Liệu</h3>
+                            <div class="form-group">
+                                <label for="lenhsx" string="Chọn Lệnh Xuất Số:" class="o_light_label"
+                                       style="font-size: 16px; margin-bottom: 5px;"/>
+                                <field name="lenhsx" class="form-control" style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group" style="margin-top: 10px;">
+                                <button name="get_report" type="object" string="Lập lệnh trộn liệu"
+                                        class="btn btn-primary"/>
+                                <button style="margin-left: 10px;" string="Hủy" special="cancel"
+                                        class="btn btn-secondary"/>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="in_lenh_tron_lieu_form" model="ir.actions.act_window">
+        <field name="name">Lệnh trộn liệu</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lenh.tron.lieu.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="lenh_tron_lieu_view"/>
+    </record>
+     <record id="in_lenh_tron_lieu_form" model="ir.actions.act_window">
+        <field name="name">Lệnh Trộn liệut</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lenh.tron.lieu.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="lenh_tron_lieu_view"/>
+    </record>
+    <menuitem id="in_lenh_tron_lieu_menu"
+              action="in_lenh_tron_lieu_form"
+              name="Lệnh trộn liệu"
+              parent="lenh_sx_menu_root"
+              sequence="3"/>
+
+    <data>
+        <record id="mrp_fm.lenh_tron_lieu" model="ir.actions.report">
+            <field name="name">Lệnh trộn liệu</field>
+            <field name="model">lenh.tron.lieu.wizard</field>
+            <field name="report_type">qweb-html</field>
+            <field name="paperformat_id" ref="fm_paper_format" />
+            <field name="report_name">mrp_fm.lenh_tron_lieu_document</field>
+            <field name="report_file">mrp_fm.lenh_tron_lieu_document</field>
+            <field name="print_report_name">Lệnh trộn liệu</field>
+            <field name="binding_model_id" ref="mrp_fm.model_report_mrp_fm_lenh_tron_lieu_document"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="bao_cao_phan_bo_ke_hoach_document">
+        <t t-call="web.report_layout" class="container-fluid p-0">
+            <meta charset="utf-8"/>
+            <link rel="stylesheet" href="/base_inheritance/static/src/css/style.css"/>
+            <style>
+                @media only screen and (max-width: 576px) {
+                    .responsive-1 table {
+                        min-width: 1000px;
+                    }
+                    .responsive-table-1 .with-size {
+                        width: 80px;
+                    }
+                    .responsive-1 .responsive-table-1 {
+                        font-size: 14px;
+                    }
+                }
+
+                @media only screen and (max-width: 800px) {
+                    .responsive-1 table{
+                        min-width: 1200px;
+                    }
+                    .responsive-table-1 .with-size {
+                        width: 80px;
+                    }
+                    .responsive-1 .responsive-table-1 {
+                        font-size: 14px;
+                    }
+                }
+                @media only screen and (max-width: 1200px) {
+                    .responsive-1 table{
+                        min-width: 1300px;
+                    }
+                    .responsive-table-1 .with-size {
+                        width: 80px;
+                    }
+                    .responsive-1 .responsive-table-1 {
+                        font-size: 14px;
+                    }
+                }
+                @media only screen and (max-width: 1600px) {
+                    .responsive-1 table{
+                        min-width: 100%;
+                    }
+                    .responsive-table-1 .with-size {
+                        width: 80px;
+                    }
+                    .responsive-1 .responsive-table-1 {
+                        width: 100%;
+                        font-size: 16px;
+                    }
+                }
+                @media only screen and (min-width: 1600px) {
+                    .responsive-1 table{
+                        min-width: 100%;
+                    }
+                    .responsive-table-1 .with-size {
+                        width: 80px;
+                    }
+                    .responsive-1 .responsive-table-1 {
+                        width: 100%;
+                        font-size: 22px;
+                    }
+                }
+            </style>
+            <div class="page p-0"
+                 style="font-family :Time New Roman !important;">
+                <div class="oe_structure">
+                    <div class="col-sm-12 col-md-12 p-0">
+                        <h2 style="width:100%; text-align:center;font-weight: 550;font-size: 30px;text-transform: uppercase; margin: 25px 0px;"
+                            class="text-center bold">
+                            <center>Báo Cáo Phân Bổ Kế Hoạch</center>
+                        </h2>
+
+                            <center style="margin: 20px 0px">
+                                <t t-if="date_start">
+                                    <span class="text-center bold"><strong>Từ ngày : <t
+                                            t-esc="date_start"/></strong></span>
+                                </t>
+                                <t t-if="date_start and date_end">
+                                    <span class="text-center bold"> - </span>
+                                </t>
+                                <t t-if="date_end">
+                                    <span class="text-center bold"><strong>Đến ngày : <t
+                                            t-esc="date_end"/></strong></span>
+                                </t>
+                            </center>
+                    </div>
+                    <div class="table-responsive-sm table-responsive-md table-responsive-lg responsive-1">
+                        <t t-set="mays" t-value="[]"/>
+                        <t t-foreach="docs" t-as="o">
+                            <t t-set="mays" t-value="mays+[o.lenhsx_ids.may_id]"/>
+                        </t>
+                        <t t-set="mays_sorted"
+                           t-value="sorted(set(mays), key=lambda x: x.tenmay if isinstance(x.tenmay, str) else '')"/>
+                        <!--<t t-foreach="mays_sorted" t-as="o"><div><t t-esc="o"/></div></t>-->
+                        <t t-set="ngays" t-value="[]"/>
+                        <t t-foreach="docs" t-as="o">
+                            <t t-set="ngays" t-value="ngays+[o.ngay]"/>
+                        </t>
+
+                        <table class="table-bordered responsive-table-1"
+                               style="table-layout: fixed; border-collapse: collapse; border : border-box;">
+                            <thead>
+                                <tr class="table-success">
+                                    <th class="text-center with-size"
+                                        style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black; text-align: center;">
+                                        Ngày</th>
+                                    <t t-foreach="mays_sorted" t-as="_may">
+                                        <th class="text-center"
+                                            style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black; text-align: center;"><t
+                                                t-esc="_may.tenmay"/></th>
+                                    </t>
+                                </tr>
+                            </thead>
+                            <tbody class="sale_tbody" style="border: 1px solid black;table-layout: fixed;">
+                                <t t-foreach="sorted(list(set(ngays)))" t-as="_ngay">
+                                    <tr>
+                                        <td t-esc="_ngay" class="text-center"
+                                            style="border: 1px solid black; text-align: center;"></td>
+                                        <t t-foreach="mays_sorted" t-as="_may">
+                                            <!--<td t-esc="_may.tenmay"></td>-->
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <div class="list-group list-group-numbered">
+                                                    <t t-foreach="docs" t-as="o">
+                                                        <t t-if="o.ngay==_ngay and o.lenhsx_ids.may_id==_may">
+                                                            <div class="list-group-item no-gutters"
+                                                                 style="border: 1px solid black; padding: 8px;">
+                                                                <!--<span t-esc="o.lenhsx"></span>-->
+                                                                <!--<span t-esc="o.khachhang"></span>-->
+                                                                <div class="col-xl-12 no-gutters">
+                                                                    <div class="col-xl-12 no-gutters text-center">
+                                                                        <b style="font-weight: 700;">Đ.hàng: <span
+                                                                                style="font-weight: 400;"><t
+                                                                                t-esc="o.madonhang"/></span></b>
+                                                                    </div>
+                                                                    <div class="col-xl-12 row no-gutters">
+                                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                            <b style="font-weight: 700;">Mã NB: <span
+                                                                                        style="font-weight: 400;"><t
+                                                                                        t-esc="o.manoibosp"/></span></b>
+                                                                        </div>
+                                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                            <b style="font-weight: 700;">Mã TM: <span
+                                                                                        style="font-weight: 400;"><t
+                                                                                        t-esc="o.mathuongmaisp"/></span></b>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xl-12 row no-gutters">
+                                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                            <b style="font-weight: 700;">KLDK: <span
+                                                                                        style="font-weight: 400;"><t
+                                                                                        t-esc="'{0:,.0f}'.format(o.khoiluong_dukien).replace(',', '.')"/></span></b>
+                                                                        </div>
+                                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                                            <b style="font-weight: 700;">KLTT: <span
+                                                                                        style="font-weight: 400;"><t
+                                                                                        t-esc="'{0:,.0f}'.format(o.khoiluong_thucte).replace(',', '.')"/></span></b>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </t>
+                                                    </t>
+                                                </div>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+
+                                <!--                                <t t-set="i" t-value="1"/>-->
+                                <!--                                <t t-foreach="docs" t-as="o">-->
+                                <!--                                    <t t-foreach="o.lenhsx_ids.may_id" t-as="l">-->
+                                <!--                                        <tr>-->
+                                <!--                                            <td class="text-center"-->
+                                <!--                                                style="text-align: center;padding : 8px;border: 1px solid black;">-->
+                                <!--                                                <span t-esc="i"/>-->
+                                <!--                                                <t t-set="i" t-value="i+1"/>-->
+                                <!--                                            </td>-->
+                                <!--                                            <td class="text-left"-->
+                                <!--                                                style="text-align: left;padding : 8px;border: 1px solid black;">-->
+                                <!--                                                <span t-esc="l.tenmay"/>-->
+                                <!--                                            </td>-->
+                                <!--                                            <td class="text-left"-->
+                                <!--                                                style="text-align: left;padding : 8px;border: 1px solid black;">-->
+                                <!--                                                <span t-esc="o.ngay"/>-->
+                                <!--                                            </td>-->
+                                <!--                                        </tr>-->
+                                <!--                                    </t>-->
+
+                                <!--                                </t>-->
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+</odoo>
+
+

@@ -1,0 +1,19 @@
+py --version
+py -m pip --version
+py -m pip install -U pyarmor
+
+3.7->3.11
+
+Cài đặt
+D:\dev\FM\venv\Scripts>python.exe -m pip install --upgrade pip
+D:\dev\FM\venv\Scripts>python.exe -m pip install pyarmor
+
+Mã hóa
+D:\dev\FM\venv\Scripts>pyarmor g -O "D:\Temp\test\dist" -r -i "D:\dev\FM\odoo\extra-addons\mrp_fm\models"
+
+Thêm file requirements.txt
+pyarmor
+
+pyarmor gen -O dist -r -i sample_package
+https://quantrimang.com/cong-nghe/bao-ve-tap-lenh-python-chong-lai-ky-thuat-dao-nguoc-bang-pyarmor-198780
+https://pyarmor.readthedocs.io/en/latest/index.html

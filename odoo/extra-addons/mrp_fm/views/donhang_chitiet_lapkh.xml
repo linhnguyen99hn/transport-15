@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--View-->
+    <record id="lapkehoach_donhang_chitiet_list_view" model="ir.ui.view">
+        <field name="name">lapkehoach.donhang.chitiet.list</field>
+        <field name="model">donhang.chitiet</field>
+        <field name="arch" type="xml">
+            <tree string="Đơn hàng chi tiết" create="0" delete="0">
+                <header>
+                    <button name="action_lap_ke_hoach" type="object" string="Lập kế hoạch" class="btn-primary"/>
+                </header>
+                <field name="donhang_id" optional="show" widget="many2one" context="{'form_view_ref': 'mrp_fm.don_hang_form_view'}"/>
+                <field name="mathuongmaisp" optional="show"  widget="many2one" context="{'form_view_ref': 'mrp_fm.dm_sanpham_form_view'}"/>
+                <field name="soluong" optional="show"/>
+                <field name="ngaydat" optional="show"/>
+                <field name="ngaygiao" optional="show"/>
+                <field name="tinhtrangkehoach" optional="show"/>
+                <field name="soluongdacokehoach" optional="show"/>
+                <field name="soluongchuacokehoach" optional="show"/>
+                <button name="btn_xemkehoachdet" type="object" string="Xem" class="oe_highlight" attrs="{'invisible': [('soluongdacokehoach', '=', 0)]}"/>
+          </tree>
+        </field>
+    </record>
+    <record id="lapkehoach_donhang_chitiet_search_view" model="ir.ui.view">
+        <field name="name">lapkehoach.donhang.chitiet.search</field>
+        <field name="model">donhang.chitiet</field>
+        <field name="arch" type="xml">
+            <search string="Đơn hàng chi tiết">
+                <field name="donhang_id"/>
+                <field name="mathuongmaisp"/>
+                <field name="tinhtrangkehoach"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action-->
+    <record id="action_lapkehoach_donhang_chitiet" model="ir.actions.act_window">
+        <field name="name">Lập kế hoạch theo đơn hàng chi tiết</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">donhang.chitiet</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="lapkehoach_donhang_chitiet_search_view"/>
+        <field name="view_id" ref="lapkehoach_donhang_chitiet_list_view"/>
+    </record>
+
+    <!-- Menu-->
+    <menuitem id="lapkehoach_menu"
+              action="action_lapkehoach_donhang_chitiet"
+              name="Lập kế hoạch"
+              parent="hoat_dong_menu_root"
+              sequence="2"/>
+</odoo>

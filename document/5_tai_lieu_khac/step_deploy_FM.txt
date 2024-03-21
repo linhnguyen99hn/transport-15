@@ -1,0 +1,101 @@
+- Cài docker desktop
+- docker login (giaduc8289/hung1502aA@)
+Thực hiện build code (máy local): cmd cd D:dev/FM
+- docker build -t [image_name:image_tag] ./ (docker build -t giaduc8289/fm:1.0.0 .)
+- docker push [image_name:image_tag] (docker.io/giaduc8289/fm:1.0.0)
+Thực hiện deploy (máy chủ):
+- docker pull [image_name:image_tag] (giaduc8289/fm:1.0.0)
+- docker rm -f odoo_fm
+- docker run -d -v /root/app/datadir:/mnt/data_dir -p 8068:8069 --name odoo_fm -e ODOO_HTTP_SOCKET_TIMEOUT=10 --link db:db -t giaduc8289/fm:1.0.5 -- --db_user odoo --db_password admin@123 --database fm_db --load-language vi_VN --language vi_VN --data-dir /mnt/data_dir --without-demo all
+- docker run -v /root/app/datadir:/mnt/data_dir -p 8068:8069 --name odoo_fm -e ODOO_HTTP_SOCKET_TIMEOUT=10 --link db:db -t giaduc8289/fm:1.0.1 -- --db_user odoo --db_password admin@123 --database fm_db --language vi_VN --data-dir /mnt/data_dir
+(giaduc8289/fm:1.0.0)
+-docker logs -f odoo_fm
+
+Thực hiện deploy bản cho khách hàng demo:
+- docker run -d -v /root/app/datadir:/mnt/data_dir -p 8050:8069 --name demo_fm -e ODOO_HTTP_SOCKET_TIMEOUT=10 --link db:db -t giaduc8289/fm:1.1.3 -- --db_user odoo --db_password admin@123 --database demo_fm --load-language vi_VN --language vi_VN --data-dir /mnt/data_dir --without-demo all
+
+
+-Xóa container DB
+docker rm db
+-Tạo container cho databaser posgresql (PG)
+docker run --name db -v /root/pg/data:/var/lib/postgresql/data -p 8006:5432 -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=admin@123 -e POSTGRES_DB=postgres -d postgres
+
+Phiên bản cuối: 1.0.23
+
+git bash
+ssh root@112.78.1.221
+root/3tqASuX0!Ab2
+ssh root@103.153.215.100 -p 7878
+root/-5=^0aNOnY557*!
+history
+docker ps
+docker logout/login
+docker logs -f odoo
+-docker images (Xem danh sách các images có trên hệ thống)
+-docker rmi ImageID (xóa những image không dùng đến nữa. Ví dụ: sudo docker rmi 7a86f8ffcb25)
+--
+clear
+docker exec -u root -it odoo /bin/bash
+docker exec -it odoo /bin/bash
+nginx -T
+ctrl+c
+git config --global http.sslBackend "openssl"
+df -h xem bộ nhớ
+-sử dụng lệnh docker exec để thực hiện lệnh bên trong container
+docker exec -it <container-id-or-name> pip install <package-name>
+
+
+docker start odoo
+ docker run -v /root/app/datadir:/mnt/data_dir -p 8068:8069 --name odoo_fm -e ODOO_HTTP_SOCKET_TIMEOUT=10 --link db:db -t giaduc8289/fm:1.0.1 -- --db_user odoo --db_password admin@123 --database fm_db --language vi_VN --data-dir /mnt/data_dir
+--Hiện các container
+docker ps -a
+
+dochub:
+-https://hub.docker.com/
+-hungtv2012@gmail.com|giaduc8289/hung1502aA@
+-Repository: sinhhoa
+-docker push giaduc8289/fm:tagname
+-docker logout
+-docker login
+-docker tag firstimage giaduc8289/fm:tagname
+-docker push...
+
+github:
+https://www.youtube.com/watch?v=mtGMbc4Csm0
+-download git sgm
+-chuột phải, git bash here
+-git clone https://github.com/Giaduc8289/fm.git
+-git status
+-git add *
+-git commit -m""
+-git push
+-quyền, ảnh hưởng mạng, config git
+hoangdat2390@gmail.com
+git rm -r . --cached
+git push -f origin
+git add -f DLL/*
+-Bỏ qua file odoo/odoo.conf:
+File .gitignore thêm dòng: odoo/odoo.conf
+chạy lệnh: git rm --cached odoo/odoo.conf
+
+posgresql:
+-create extension dblink
+-select * 
+from dblink('user=odoo password=odoo dbname=erp_app_220319'
+			,'select id,active,login from res_users  where login like ''%@%''') 
+			 as t1(id int,active boolean,login varchar)
+-drop extension dblink
+
+root/app/datadir
+
+Các bước dựng bản demo:
+B1: login vào server
+B2: chạy lệnh tạo container demo theo cấu trúc dưới
+   lưu ý trước khi chạy điều chỉnh các thông tin sau:
+	- điều chỉnh port 8050: 8050:8069
+	- điều chỉnh image mới nhất: giaduc8289/fm:1.0.90
+	- điều chỉnh tên db: demo_fm_01
+   docker run -v /root/app/datadir:/mnt/data_dir -p 8050:8069 --name odoo_fm -e ODOO_HTTP_SOCKET_TIMEOUT=10 --link db:db -t giaduc8289/fm:1.0.90 -- --db_user odoo --db_password admin@123 --database demo_fm_01 --language vi_VN --data-dir /mnt/data_dir
+B3: cài theme "MuK Backend Theme", cài app Mrp_FM, OdooBot, tạo user, và có thể bổ sung thêm các thông tin như: tên công ty, địa chỉ, logo,...
+ 
+

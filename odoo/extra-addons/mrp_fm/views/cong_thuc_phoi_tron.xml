@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="dm_ctpt_form_view" model="ir.ui.view">
+        <field name="name">dm.ctpt.form</field>
+        <field name="model">cong.thuc.phoi.tron</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <field name="tencongthuc"/>
+                        <field name="tensanpham"/>
+                        <field name="banggia"/>
+                        <field name="premix"/>
+                        <!--                        <field name="tongdongia"/>-->
+                    </group>
+                    <!--                    <group>-->
+                    <!--                        <group>-->
+                    <!--                            <field name="ngaybatdau"/>-->
+                    <!--                            <field name="ngayketthuc"/>-->
+                    <!--                        </group>-->
+                    <!--                    </group>-->
+                    <group string="Nguyên liệu">
+                        <group>
+                            <label style="font-size:16px" for="dongia" string="Đơn giá nguyên liệu"/>
+                            <h1>
+                                <field style="width:55%" name="dongia"/>
+                            </h1>
+                        </group>
+                        <group>
+                            <label style="font-size:16px;padding-right: 2rem" for="khoiluongme" string="Tổng khối lượng 1 mẻ"/>
+                            <h1>
+                                <field style="width:55%" name="khoiluongme"/>
+                            </h1>
+                        </group>
+                    </group>
+                    <group string="Nhân công">
+                        <group>
+                            <label style="font-size:16px" for="chiphinhancong" string="Chi phí gia công"/>
+                            <h1>
+                                <field style="width:55%" name="chiphinhancong"/>
+                            </h1>
+                             <label style="font-size:16px" for="chiphibaozumbo" string="Chi phí bao zumbo"/>
+                            <h1>
+                                <field style="width:100%" name="chiphibaozumbo"/>
+                            </h1>
+                        </group>
+                        <group>
+                           <label style="font-size:16px" for="chiphivobao" string="Chi phí vỏ bao"/>
+                            <h1>
+                                <field style="width:55%"  name="chiphivobao"/>
+                            </h1>
+                            <label style="font-size:16px" for="chiphiballetquanmang" string="Chi phí ballet quấn màng"/>
+                            <h1>
+                                <field style="width:55%" name="chiphiballetquanmang"/>
+                            </h1>
+                        </group>
+                        <group style="margin-top: 3rem">
+                            <label style="font-size:16px"  for="tongdongia" string="Tổng chi phi"/>
+                            <h1>
+                                <field style="width:55%" name="tongdongia"/>
+                            </h1>
+
+                        </group>
+
+                    </group>
+                    <br/>
+                    <notebook>
+                        <page id="nguyenlieu_tab" name="dinhmuc"
+                              string="Nguyên liệu">
+                            <field name="dinhmuc" widget="one2many">
+                                <tree editable="bottom">
+                                    <field name="id" optional="hide"/>
+                                    <field name="sothutu" optional="show" style="width: 10%, text-align: center"/>
+                                    <field name="manguyenlieu" optional="show"/>
+                                    <field name="nguyenlieu" optional="show"/>
+                                    <field name="khoiluong" optional="show"/>
+                                    <field name="quytrinhdolieu" optional="show"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page id="tieuchuan_tab" name="tieuchuan"
+                              string="Tiêu chuẩn sản phẩm">
+                            <field name="tieuchuansanpham" widget="one2many">
+                                <tree editable="bottom">
+                                    <field name="noidungkiemtra" optional="show"/>
+                                    <field name="tieuchuansanpham" optional="show"/>
+                                    <field name="ghichu" optional="show"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page id="tieuchuanthietbi_tab" name="tieuchuanthietbi"
+                              string="Tiêu chuẩn thiết bị">
+                            <field name="tieuchuanthietbi" widget="one2many">
+                                <tree editable="bottom">
+                                    <field name="noidung" optional="show"/>
+                                    <field name="tieuchuanthietbi" optional="show"/>
+                                    <field name="ghichu" optional="show"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page id="dongianhancong_tab" name="dongianhancong"
+                              string="Đơn giá nhân công">
+                            <field name="dongianhancong_ids" widget="one2many">
+                                <tree editable="bottom">
+                                    <field name="dongialuong" optional="show"/>
+                                    <field name="dongia" optional="show"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="dm_ctpt_search_view" model="ir.ui.view">
+        <field name="name">dm.ctpt.search</field>
+        <field name="model">cong.thuc.phoi.tron</field>
+        <field name="arch" type="xml">
+            <search string="Công thức phối trộn">
+                <field name="tencongthuc"/>
+                <field name="ngaybatdau"/>
+                <field name="ngayketthuc"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="dm_ctpt_list_view" model="ir.ui.view">
+        <field name="name">dm.ctpt.list</field>
+        <field name="model">cong.thuc.phoi.tron</field>
+        <field name="arch" type="xml">
+            <tree string="Công thức phối trộn">
+                <field name="tencongthuc" optional="show"/>
+                <field name="ngaybatdau" optional="show"/>
+                <field name="ngayketthuc" optional="show"/>
+                <field name="tongdongia" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    action-->
+    <record id="action_dm_ctpt_form" model="ir.actions.act_window">
+        <field name="name">Danh mục công thức phối trộn</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cong.thuc.phoi.tron</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="dm_ctpt_search_view"/>
+        <field name="view_id" ref="dm_ctpt_list_view"/>
+    </record>
+
+    <!--    menu-->
+    <menuitem id="dm_ctpt_menu"
+              action="action_dm_ctpt_form"
+              name="Danh mục công thức phối trộn"
+              parent="danh_muc_menu_root"
+              sequence="6"/>
+</odoo>

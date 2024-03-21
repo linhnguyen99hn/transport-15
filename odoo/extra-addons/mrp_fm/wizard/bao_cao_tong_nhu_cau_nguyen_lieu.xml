@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="report_bao_cao_nhu_cau_nguyen_lieu" model="ir.ui.view">
+        <field name="name">bao.cao.nhu.cau.nguyen.lieu.wizard.form</field>
+        <field name="model">bao.cao.nhu.cau.nguyen.lieu</field>
+        <field name="arch" type="xml">
+            <form string="Báo cáo nhu cầu nguyên liệu sản xuất" create="false">
+                <sheet>
+                    <div class="row no-gutters">
+                        <div class="col-sm-12 col-md-4 col-xl-4 d-none d-sm-block d-none d-sm-block">
+                            <div class="d-flex justify-content-center align-items-center" style="width: 100%; padding: 0px 20px; height: 100%; display: flex; align-items: center;justify-content: center;">
+                                <img src="/web/binary/company_logo" alt="Logo" class="rounded img-fluid" style="width: 100%; padding: 0px 20px;"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-8 col-xl-8 row " style="padding: 15px 0px;">
+                            <div class="col-sm-12 col-md-12 col-xl-12" style="padding-bottom: 12px;">
+                                <center>
+                                    <h3>Báo Cáo Nhu Cầu Nguyên Liệu</h3>
+                                </center>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="date_start" string="Từ Ngày" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="date_start" widget="date" class="form-control"
+                                       style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="date_end" string="Đến Ngày" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="date_end" widget="date" class="form-control"
+                                       style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="nguyenlieu" string="Nguyên liệu" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="nguyenlieu" widget="many2one" class="form-control"
+                                       style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                <button name="get_report" type="object" string="Lập báo cáo" class="oe_highlight"/>
+                                <button string="Hủy" special="cancel"/>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="bao_cao_nhu_cau_nguyen_lieu_form" model="ir.actions.act_window">
+        <field name="name">Báo cáo nhu cầu nguyên liệu</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bao.cao.nhu.cau.nguyen.lieu</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="report_bao_cao_nhu_cau_nguyen_lieu"/>
+    </record>
+
+    <menuitem id="bao_cao_nhu_cau_nguyen_lieu"
+              parent="bao_cao_menu_root"
+              action="bao_cao_nhu_cau_nguyen_lieu_form"
+              name="Báo cáo nhu cầu nguyên liệu"
+              sequence="6"/>
+
+    <data>
+        <record id="action_bao_cao_nhu_cau_nguyen_lieu" model="ir.actions.report">
+            <field name="name">Báo cáo nhu cầu nguyên liệu</field>
+            <field name="model">bao.cao.nhu.cau.nguyen.lieu</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">mrp_fm.bao_cao_nhu_cau_nguyen_lieu_document</field>
+            <field name="report_file">mrp_fm.bao_cao_nhu_cau_nguyen_lieu_document</field>
+            <field name="print_report_name">Báo cáo nhu cầu nguyên liệu</field>
+            <field name="binding_model_id" ref="model_report_mrp_fm_bao_cao_nhu_cau_nguyen_lieu_document"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+
+</odoo>

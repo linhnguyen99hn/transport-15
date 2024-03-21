@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Top menu item -->
+    <menuitem id="mrp_fm_menu_root"
+              name="Sản xuất FM"
+              web_icon="mrp_fm,static/description/icon.png"
+              sequence="255"/>
+
+    <menuitem id="hoat_dong_menu_root"
+              name="Hoạt động"
+              parent="mrp_fm_menu_root"
+              sequence="1" />
+
+    <menuitem id="danh_muc_menu_root"
+              name="Danh mục"
+              parent="mrp_fm_menu_root"
+              sequence="2" />
+
+    <menuitem id="lenh_sx_menu_root"
+                  name="Tạo lệnh"
+                  parent="mrp_fm_menu_root"
+                  sequence="3" />
+
+    <menuitem id="bao_cao_menu_root"
+              name="Báo cáo"
+              parent="mrp_fm_menu_root"
+              sequence="4" />
+
+    <menuitem id="thiet_lap_menu_root"
+              name="Thiết lập"
+              parent="mrp_fm_menu_root"
+              sequence="6" />
+
+
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_search_chi_tiet_don_hang" model="ir.ui.view">
+        <field name="name">search_view</field>
+        <field name="model">donhang.chitiet</field>
+        <field name="arch" type="xml">
+            <search string="Chi Tiết Đơn Hàng">
+                <field name="mathuongmaisp"/>
+                <field name="ngaydat"/>
+                <field name="ngaygiao"/>
+                <field name="soluong"/>
+                <field name="tensanpham"/>
+                <field name="donhang_id"/>
+                <field name="kehoach_ids"/>
+                <field name="tinhtrangkehoach"/>
+                <field name="dasanxuat"/>
+                <field name="masx"/>
+                <field name="canhbao"/>
+                <group expand="0" string="Group By">
+                    <filter string="Đơn hàng" name="donhang_group" context="{'group_by': 'donhang_id'}"/>
+                    <filter string="Cảnh báo" name="canhbao_group" context="{'group_by': 'canhbao'}"/>
+                    <filter string="Tình trạng kế hoạch" name="may_group" context="{'group_by': 'tinhtrangkehoach'}"/>
+                    <filter string="Cảnh báo" name="sanpham_group" context="{'group_by': 'canhbao'}"/>
+                    <filter string="Mã thương mại" name="mathuongmai_group" context="{'group_by': 'mathuongmaisp'}"/>
+                    <filter string="Mã sản xuất" name="masanxuat_group" context="{'group_by': 'masx'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_list_chi_tiet_don_hang" model="ir.ui.view">
+        <field name="name">chi_tiet_don_hang._list</field>
+        <field name="model">donhang.chitiet</field>
+        <field name="arch" type="xml">
+            <tree string="Chi Tiết Đơn Hàng">
+                <field name="donhang_id" optional="show"/>
+                <field name="mathuongmaisp" optional="show"/>
+                <field name="masx" optional="show"/>
+                <field name="tensanpham" optional="show"/>
+                <field name="soluong" optional="show"/>
+                <field name="ngaydat" optional="show"/>
+                <field name="ngaygiao" optional="show"/>
+                <field name="kehoach_ids" optional="hide"/>
+                <field name="tinhtrangkehoach" optional="show"/>
+                <field name="soluongdacokehoach" optional="show"/>
+                <field name="soluongchuacokehoach" optional="show"/>
+                <field name="dasanxuat" optional="show"/>
+                <field name="tonkhobotri" optional="hide"/>
+                <field name="canhbao_badges" string="Thời gian chậm giao" widget="html" optional="show"/>
+                <field name="masx" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_chi_tiet_don_hang" model="ir.actions.act_window">
+        <field name="name">Chi tiết đơn hàng</field>
+        <field name="res_model">donhang.chitiet</field>
+        <field name="context">{'search_default_donhang_group': 1}</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="view_search_chi_tiet_don_hang"/>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="chi_tiet_don_hang"
+              name="Chi tiết đơn hàng"
+              action="action_chi_tiet_don_hang"
+              parent="hoat_dong_menu_root"
+              sequence="1"
+    />
+</odoo>

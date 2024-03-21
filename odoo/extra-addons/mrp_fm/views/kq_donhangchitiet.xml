@@ -1,0 +1,79 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+
+<!--    <record id="kq_donhangchitiet_form_view" model="ir.ui.view">-->
+<!--        <field name="name">thucte.sanxuat.form</field>-->
+<!--        <field name="model">thucte.sanxuat</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form class="oe_form_configuration">-->
+<!--                <sheet>-->
+<!--                <group>-->
+<!--                        <group>-->
+<!--                            <field name="donhangchitiet_id"/>-->
+<!--                            <field name="ngaysanxuat"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="tt_may_id"/>-->
+<!--                            <field name="khoiluong_thucte"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+
+
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--&lt;!&ndash;    <record id="kq_donhangchitiet_search_view" model="ir.ui.view">&ndash;&gt;-->
+<!--&lt;!&ndash;        <field name="name">don.hang.search</field>&ndash;&gt;-->
+<!--&lt;!&ndash;        <field name="model">don.hang</field>&ndash;&gt;-->
+<!--&lt;!&ndash;        <field name="arch" type="xml">&ndash;&gt;-->
+<!--&lt;!&ndash;            <search string="Đơn hàng">&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="madonhang"/>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <field name="makhach"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="ngaydat"/>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                <group expand="0" string="Group By">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                    <filter string="Nhóm sản phẩm" name="department" context="{'group_by': 'department'}"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                </group>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            </search>&ndash;&gt;-->
+<!--&lt;!&ndash;        </field>&ndash;&gt;-->
+<!--&lt;!&ndash;    </record>&ndash;&gt;-->
+
+<!--    <record id="kq_donhangchitiet_list_view" model="ir.ui.view">-->
+<!--        <field name="name">thucte.sanxuat.list</field>-->
+<!--        <field name="model">thucte.sanxuat</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree string="Thực tế sản xuất">-->
+<!--                <field name="donhangchitiet_id" optional="show"/>-->
+<!--&lt;!&ndash;                <field name="makhach" optional="show"/>&ndash;&gt;-->
+<!--                <field name="tt_may_id" optional="show"/>-->
+<!--                <field name="ngaysanxuat" optional="show"/>-->
+<!--                <field name="khoiluong_thucte" optional="show"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+<!--    &lt;!&ndash; Actions &ndash;&gt;-->
+<!--    &lt;!&ndash; Actions Đơn hàng&ndash;&gt;-->
+<!--    <record id="action_kq_donhangchitiet_form" model="ir.actions.act_window">-->
+<!--        <field name="name">Thực tế sản xuất</field>-->
+<!--        <field name="type">ir.actions.act_window</field>-->
+<!--        <field name="res_model">thucte.sanxuat</field>-->
+<!--        <field name="view_mode">tree,form,kanban</field>-->
+<!--&lt;!&ndash;        <field name="search_view_id" ref="kq_donhangchitiet_search_view"/>&ndash;&gt;-->
+<!--        <field name="view_ids" eval="[(5, 0, 0),-->
+<!--                (0, 0, {'view_mode': 'tree', 'view_id': ref('kq_donhangchitiet_list_view')}),-->
+<!--                (0, 0, {'view_mode': 'form', 'view_id': ref('kq_donhangchitiet_form_view')})]"/>-->
+<!--    </record>-->
+
+
+<!--    &lt;!&ndash; Top menu item &ndash;&gt;-->
+<!--    <menuitem id="kq_donhangchitiet_menu"-->
+<!--              action="action_kq_donhangchitiet_form"-->
+<!--              name="Kết quả thực tế sản xuất theo đơn hàng chi tiết"-->
+<!--              parent="hoat_dong_menu_root"-->
+<!--              sequence="35"/>-->
+
+
+<!--</odoo>-->

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tinh_tien_ke_hoach_form" model="ir.ui.view">
+        <field name="name">tinh.tien.ke.hoach.form</field>
+        <field name="model">tinh.tien.ke.hoach</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <sheet>
+                    <div class="row no-gutters justify-content-center">
+                        <div class="col-sm-12 col-md-4 col-xl-4 d-none d-sm-block">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="/web/binary/company_logo" alt="Logo" class="rounded img-fluid" style="width: 100%; padding: 0px 20px;"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-8 col-xl-8 row " style="padding: 15px 0px;">
+                            <div class="col-sm-12 col-md-12 col-xl-12" style="padding-bottom: 12px;">
+                                <center>
+                                    <h3>Tịnh tiến kế hoạch sản xuất</h3>
+                                </center>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="date_start" string="Từ ngày" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="date_start" widget="date" class="form-control"
+                                       style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="date_end" string="Đến ngày" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="date_end" widget="date" class="form-control"
+                                       style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="kh_may_id" string="Máy chạy" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="kh_may_id" class="form-control" style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="lenhsx_ids" string="Lệnh sản xuất" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="lenhsx_ids" class="form-control" style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="donhang" string="Đơn hàng" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="donhang" widget="many2one" class="form-control"
+                                       style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="sanpham" string="Sản phẩm" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="sanpham" widget="many2one" class="form-control"
+                                       style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="masx" string="Mã sản xuất" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="masx" widget="many2one" class="form-control"
+                                       style="height: calc(1.2em + 0.75rem + 2px);"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="thoigian_tinhtien" string="Thời gian (giờ)" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="thoigian_tinhtien"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                <button name="tinh_tien_kehoach" type="object" string="Thực hiện" class="oe_highlight"/>
+                                <button string="Hủy" special="cancel"/>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="message_success_tinh_tien_ke_hoach_form_view" model="ir.ui.view">
+        <field name="name">message.success.tinh.tien.ke.hoach.form</field>
+        <field name="model">tinh.tien.ke.hoach</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <footer>
+                    <button string="Đã tịnh tiến xong kế hoạch sản xuất!" type="object" name="reload_list_view" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="tinh_tien_ke_hoach_action" model="ir.actions.act_window">
+        <field name="name">Tịnh tiến kế hoạch</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tinh.tien.ke.hoach</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="tinh_tien_ke_hoach_form"/>
+    </record>
+
+    <menuitem id="tinh_tien_ke_hoach"
+              parent="hoat_dong_menu_root"
+              action="tinh_tien_ke_hoach_action"
+              name="Tịnh tiến kế hoạch"
+              sequence="4"/>
+
+</odoo>

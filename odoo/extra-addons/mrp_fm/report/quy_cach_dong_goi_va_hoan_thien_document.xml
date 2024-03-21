@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <template id="quy_cach_dong_goi_va_hoan_thien_document">
+        <t t-call="web.html_container">
+            <t t-call="web.report_layout">
+                <meta charset="utf-8"/>
+                <link rel="stylesheet" href="/base_inheritance/static/src/css/style.css"/>
+                <style>
+                    @media only screen and (max-width: 576px) {
+                        .responsive .table {
+                            font-size: smaller;
+                            white-space: nowrap;
+                        }
+
+                        .responsive-1 .responsive-table-1 {
+                            white-space: nowrap;
+                            font-size: smaller;
+                            white-space: nowrap;
+                            min-width: 100%;
+                        }
+
+                        .responsive-table-4 {
+                            font-size: smaller;
+                            white-space: nowrap;
+                            font-size: smaller;
+                            min-width: 800px;
+                        }
+                    }
+
+                    @media only screen and (max-width: 800px) {
+                        .responsive table {
+                            font-size: smaller;
+                            white-space: nowrap;
+                        }
+
+                        .responsive-1 .responsive-table-1 {
+                            white-space: nowrap;
+                            font-size: smaller;
+                            min-width: 100%;
+                        }
+
+                        .responsive-table-4 {
+                            font-size: smaller;
+                            white-space: nowrap;
+                            font-size: smaller;
+                            min-width: 800px;
+                        }
+                    }
+
+                    @media only screen and (max-width: 990px) {
+                        .responsive table {
+                            font-size: smaller;
+                            white-space: nowrap;
+                        }
+
+                        .responsive-1 responsive-table-1 {
+                            white-space: nowrap;
+                            font-size: smaller;
+                            min-width: 100%;
+                        }
+
+                        .responsive-table-4 {
+                            font-size: smaller;
+                            white-space: nowrap;
+                            font-size: smaller;
+                            width: 100%;
+                        }
+                    }
+
+                    @media only screen and (max-width: 1200px) {
+                        .responsive table {
+                            font-size: smaller;
+                        }
+
+                        .responsive-table-4 {
+                            font-size: smaller;
+                            white-space: nowrap;
+                            font-size: smaller;
+                            width: 100%;
+                        }
+                    }
+
+                    @media only screen and (min-width: 1200px) {
+                        .responsive table {
+                            font-size: smaller;
+                        }
+
+                        .responsive-1 .responsive-table-1 {
+                            font-size: smaller;
+                            white-space: nowrap;
+                            font-size: smaller;
+                            width: 100%;
+                        }
+                    }
+                </style>
+                <t t-call="web.basic_layout">
+                    <div class="page p-0"
+                         style="font-family :Time New Roman !important;margin-right:4%; margin-left:4%;">
+                        <div class="oe_structure"/>
+                        <div class="col-sm-12 col-md-12 p-0">
+                            <h2 style="width:100%; text-align:center; font-weight: 550; font-size: 30px; text-transform: uppercase; margin: 25px 0px;"
+                                class="text-center bold">
+                                <center>QUY CÁCH ĐÓNG GÓI VÀ HOÀN THIỆN</center>
+                            </h2>
+                        </div>
+                        <div>
+                            <t t-set="thanhphamnhanduoc" t-value="0"/>
+                            <t t-foreach="docs1" t-as="l">
+                                <t t-set="thanhphamnhanduoc"
+                                   t-value="thanhphamnhanduoc + l.khoiluongnvl1me * soluongme"/>
+                            </t>
+                            <t t-if="chaylai">
+                                <t t-set="thanhphamnhanduoc"
+                                   t-value="thanhphamnhanduoc + khoiluong1mechaylai"/>
+                            </t>
+
+                            <div class="table-responsive-sm table-responsive-md">
+                                <table class="responsive-table-4"
+                                       style="table-layout: fixed; font-family : Time New Roman; margin: 30px 0px;  width: 100%;">
+                                    <tr>
+                                        <th style="width:30%; text-align:left;">
+                                            <span class="text-left bold">
+                                                <strong>Lệnh số:
+                                                    <t
+                                                            t-esc="lenhsx"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                        <th style="width:30%; text-align:left;">
+                                            <span class="text-left bold">
+                                                <strong>Mã sản xuất:
+                                                    <t
+                                                            t-esc="manoibo"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                        <th style="width:30%; text-align:left;">
+                                            <span class="text-left bold">
+                                                <strong>Ngày sản xuất:</strong>
+                                            </span>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:30%; text-align:left;">
+                                            <span class="text-left bold">
+                                                <strong>Máy số:
+                                                    <t
+                                                            t-esc="mamay"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                        <th style="width:30%; text-align:left;">
+                                            <span class="text-left bold">
+                                                <strong>TP nhận được:
+                                                    <t t-esc="'{0:,.3f}'.format(thanhphamnhanduoc/(1 + haohut/100)).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                                </strong>
+                                            </span>
+                                        </th>
+                                        <th style="width:30%; text-align:left;">
+                                            <span class="text-left bold">
+                                                <strong>Ngày hoàn thành:</strong>
+                                            </span>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <left>
+                                    <h3 style="margin: 20px 0px;">I.Tiêu chuẩn sản phẩm trước khi đóng gói</h3>
+                                </left>
+                                <div class="table-responsive-sm table-responsive-md responsive-1">
+                                    <table class="table-bordered responsive-table-1"
+                                           style="border-collapse: collapse; border : border-box;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">STT.
+                                                </th>
+                                                <th style="background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">Nội dung
+                                                </th>
+                                                <th style="background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">Tiêu chuẩn sản phẩm
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="sale_tbody">
+                                            <tr>
+                                                <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>1</span>
+                                                </td>
+                                                <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>Màu sắc hạt</span>
+                                                </td>
+                                                <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>Hạt màu trắng</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>2</span>
+                                                </td>
+                                                <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>Kích thước hạt</span>
+                                                </td>
+                                                <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>2-3mm, hạt đồng đều, không có cám</span>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>3</span>
+                                                </td>
+                                                <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>Nhiệt hạt</span>
+                                                </td>
+                                                <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>Nhiệt hạt &lt;= 45&#176;C cho đóng bao</span>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>4</span>
+                                                </td>
+                                                <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>Mùi</span>
+                                                </td>
+                                                <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>Mùi đặc trưng, không có mùi lạ</span>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div>
+                                <left>
+                                    <h3 style="margin: 20px 0px;">II.Quy cách sản phẩm</h3>
+                                </left>
+                                <div>
+                                    <table class="table"
+                                           style="border-collapse: collapse; border : border-box;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">STT.
+                                                </th>
+                                                <th style="background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black"
+                                                    class="text-center">Mã quy cách
+                                                </th>
+                                                <th style="background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">Tên quy cách
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="sale_tbody">
+                                            <t t-set="i" t-value="1"/>
+                                            <t t-foreach="docs2" t-as="l">
+                                                <tr>
+                                                    <td style="text-align: center;padding : 4px;border: 1px solid black;">
+                                                        <span t-esc="i"/>
+                                                        <t t-set="i" t-value="i+1"/>
+                                                    </td>
+                                                    <td style="text-align: left;padding : 4px;border: 1px solid black; font-size:14px">
+                                                        <span t-field="l.maquycach"/>
+                                                    </td>
+                                                    <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                        <span>
+                                                            <pre t-raw="l.tenquycach"
+                                                                 style="font-family: Times New Roman; font-size: 14px;"/>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="table-responsive-sm table-responsive-md">
+                                <table class="responsive-table-4"
+                                       style="table-layout: fixed; font-family : Time New Roman; margin: 30px 0px;  width: 100%;">
+                                    <tr>
+                                        <th style="text-align:center;">
+                                            <span t-esc="parameters['psale']"/>
+                                            <br/>
+                                            <span>
+                                                (ký, họ tên)
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <span t-esc="parameters['tenphongsale']"/>
+                                        </th>
+                                        <!--                                        <th style="text-align:center;">-->
+                                        <!--                                            <span t-esc="parameters['bophandonggoi']"/>-->
+                                        <!--                                            <br/>-->
+                                        <!--                                            <span>-->
+                                        <!--                                                (ký, họ tên)-->
+                                        <!--                                            </span>-->
+                                        <!--                                        </th>-->
+                                        <!--                                        <th style="text-align:center;">-->
+                                        <!--                                            <span t-esc="parameters['bophanhoanthien']"/>-->
+                                        <!--                                            <br/>-->
+                                        <!--                                            <span>-->
+                                        <!--                                                (ký, họ tên)-->
+                                        <!--                                            </span>-->
+                                        <!--                                        </th>-->
+                                        <!--                                        <th style="text-align:center;">-->
+                                        <!--                                            <span t-esc="parameters['truongcasx']"/>-->
+                                        <!--                                            <br/>-->
+                                        <!--                                            <span>-->
+                                        <!--                                                (ký, họ tên)-->
+                                        <!--                                            </span>-->
+                                        <!--                                        </th>-->
+                                        <th style="text-align:center;">
+                                            <span t-esc="parameters['gdsanxuat']"/>
+                                            <br/>
+                                            <span>
+                                                (ký, họ tên)
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <span t-esc="parameters['tengdsanxuat']"/>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="oe_structure"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

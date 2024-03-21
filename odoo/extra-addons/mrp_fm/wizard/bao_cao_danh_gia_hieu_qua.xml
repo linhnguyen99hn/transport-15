@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="report_bao_cao_hieu_qua_sx" model="ir.ui.view">
+        <field name="name">bao.cao.hieu.qua.wizard.form</field>
+        <field name="model">bao.cao.hieu.qua</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_start" string="Từ ngày"/>
+                            <field name="donhang" string="Đơn hàng" widget="many2one"/>
+                        </group>
+                        <group>
+                            <field name="date_end" string="Đến ngày"/>
+                            <field name="lenhsx" string="Lệnh sản xuất" widget="many2one"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="get_report" type="object" string="Lập báo cáo" class="oe_highlight"/>
+                        <button string="Hủy" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="bao_cao_hieu_qua_sx_form" model="ir.actions.act_window">
+        <field name="name">Báo cáo hiệu quả sản xuất</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bao.cao.hieu.qua</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="report_bao_cao_hieu_qua_sx"/>
+    </record>
+
+<!--    <menuitem id="bao_cao_hieu_qua_sx"-->
+<!--              parent="bao_cao_menu_root"-->
+<!--              action="bao_cao_hieu_qua_sx_form"-->
+<!--              name="Báo cáo hiệu quả sản xuất"-->
+<!--              sequence="5"/>-->
+
+    <data>
+        <record id="action_bao_cao_hieu_qua_sx" model="ir.actions.report">
+            <field name="name">Báo cáo hiệu quả sản xuất</field>
+            <field name="model">bao.cao.hieu.qua</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">mrp_fm.bao_cao_hieu_qua_sx_document</field>
+            <field name="report_file">mrp_fm.bao_cao_hieu_qua_sx_document</field>
+            <field name="print_report_name">Báo cáo hiệu quả sản xuất</field>
+            <field name="binding_model_id" ref="model_report_mrp_fm_bao_cao_hieu_qua_sx_document"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+
+</odoo>

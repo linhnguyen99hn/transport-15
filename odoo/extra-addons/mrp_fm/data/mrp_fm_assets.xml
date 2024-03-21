@@ -1,0 +1,9 @@
+<odoo>
+  <data>
+    <template id="assets_frontend" name="Mrp FM Assets" inherit_id="web.assets_frontend">
+      <xpath expr="." position="inside">
+        <script type="text/javascript" src="/mrp_fm/static/src/js/d3.min.js"></script>
+      </xpath>
+    </template>
+  </data>
+</odoo>

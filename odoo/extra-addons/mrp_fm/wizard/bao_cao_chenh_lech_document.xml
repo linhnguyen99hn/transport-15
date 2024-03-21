@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <template id="bao_cao_chenh_lech_document">
+        <t t-call="web.html_container">
+            <t t-call="web.report_layout">
+                <link rel="stylesheet" href="/base_inheritance/static/src/css/style.css"/>
+                <meta charset="utf-8"/>
+                <t t-call="web.basic_layout">
+                    <div class="page" style="font-family :Arial !important;">
+                        <div class="oe_structure"/>
+                        <br/>
+                        <h2 style="width:100%; text-align:center;font-weight: 550;font-size: 40px;text-transform: uppercase;"
+                            class="text-center bold"><center>Báo cáo chênh lệch sản xuất</center></h2>
+                        <span class="text-center bold">
+                            <center>
+                                <t t-if="date_start">
+                                    <span class="text-center bold"><strong>Từ ngày : <t
+                                            t-esc="date_start"/></strong></span>
+                                </t>
+                                <t t-if="date_start and date_end">
+                                    <span class="text-center bold"> - </span>
+                                </t>
+                                <t t-if="date_end">
+                                    <span class="text-center bold"><strong>Đến ngày : <t
+                                            t-esc="date_end"/></strong></span>
+                                </t>
+                                <br/>
+                                <t t-if="madonhang">
+                                    <span class="text-center bold"><strong>Đơn hàng : <t
+                                            t-esc="madonhang"/></strong></span>
+                                    <br/>
+                                </t>
+                                <t t-if="tensanpham">
+                                    <span class="text-center bold"><strong>Sản phẩm : <t
+                                            t-esc="tensanpham"/></strong></span>
+                                    <br/>
+                                </t>
+                            </center>
+                        </span>
+
+                        <br/>
+                        <div>
+                            <table class="table-bordered"
+                                   style="border-collapse: collapse; width : 100%; border : border-box;">
+                                <thead>
+                                    <tr>
+                                        <th style="width :3%;background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                            class="table-item">STT</th>
+                                        <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                            class="text-center">Ngày</th>
+                                        <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                            class="text-center">Ca</th>
+                                        <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                            class="text-center">Đơn hàng</th>
+                                        <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                            class="text-center">Sản phẩm</th>
+                                        <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                            class="text-center">Khối lượng dự kiến</th>
+                                        <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                            class="text-center">Khối lượng thực tế</th>
+                                        <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                            class="text-center">Chênh lệch</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="sale_tbody">
+                                    <t t-set="i" t-value="1"/>
+                                    <t t-foreach="docs" t-as="o">
+                                        <tr>
+                                            <td class="text-center"
+                                                style="text-align: center;padding : 8px;border: 1px solid black;">
+                                                <span t-esc="i"/>
+                                                <t t-set="i" t-value="i+1"/>
+                                            </td>
+                                            <td class="text-left"
+                                                style="text-align: left;padding : 8px;border: 1px solid black;">
+                                                <span t-field="o.ngay"/>
+                                            </td>
+                                            <td class="text-center"
+                                                style="text-align: left;padding : 8px;border: 1px solid black;">
+                                                <span t-field="o.ca"/>
+                                            </td>
+                                            <td class="text-left"
+                                                style="text-align: left;padding : 8px;border: 1px solid black;">
+                                                <span t-field="o.donhang"/>
+                                            </td>
+                                            <td class="text-left"
+                                                style="text-align: center;padding : 8px;border: 1px solid black;">
+                                                <span t-field="o.sanpham"/>
+                                            </td>
+                                            <td class="text-center"
+                                                style="text-align: right;padding : 8px;border: 1px solid black;">
+                                                <span t-field="o.khoiluong_dukien"/>
+                                            </td>
+                                            <td class="text-center"
+                                                style="text-align: right;padding : 8px;border: 1px solid black;">
+                                                <span t-field="o.khoiluong_thucte"/>
+                                            </td>
+                                            <td class="text-center"
+                                                style="text-align: right;padding : 8px;border: 1px solid black;">
+                                                <span t-field="o.chenhlech"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="oe_structure"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

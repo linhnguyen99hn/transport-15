@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Gantt View Test-->
+    <record id="kehoachsanxuat_timeline_view" model="ir.ui.view">
+        <field name="name">kehoachsanxuat.timeline</field>
+        <field name="model">kehoach.sanxuat</field>
+        <field name="type">timeline</field>
+        <field name="arch" type="xml">
+            <timeline date_start="thoigian_batdau"
+                      date_stop="thoigian_ketthuc"
+                      default_group_by='kh_may_id'
+                      default_scale="week"
+                      scales="day,week,month,year"
+                      precision="{'day': 'hour:full', 'week': 'day:full', 'month': 'day:full', 'year': 'day:full'}"
+                      event_open_popup="true"
+                      zoomKey="ctrlKey"
+                      colors="red:mucdouutien == '1.uutien';yellow:mucdouutien == '2.dukien';green:mucdouutien == '3.sanxuat';"
+            >
+                <!--                      dependency_arrow="task_dependency_ids"-->
+                <field name="madonhang"/>
+                <field name="mathuongmaisp"/>
+                <field name="manoibosp"/>
+                <!--                <field name="display_name"/>-->
+                <!--                <field name="donhangchitiet_id"/>-->
+                <!--                <field name="sanpham"/>-->
+                <field name="khoiluong_dukien"/>
+                <field name="khoiluong_thucte"/>
+                <field name="chenhlech"/>
+                <field name="canhbao_badges_chenhlechs" widget="html"/>
+                <templates>
+                    <div t-name="timeline-item">
+                        <!--                        <div t-esc="record.display_name" style="text-align:center;font-weight: bolder;"/>-->
+                        <div t-esc="record.madonhang" style="text-align:center;font-weight: bolder;"/>
+                        <div t-esc="record.mathuongmaisp" style="text-align:center;font-weight: bolder;"/>
+                        <div t-esc="record.manoibosp" style="text-align:center;font-weight: bolder;"/>
+                        KL dự kiến:
+                        <span t-esc="record.khoiluong_dukien"/><br/>
+                        KL thực tế:
+                        <span t-esc="record.khoiluong_thucte"/><br/>
+                        Chênh lệch:
+                        <span t-esc="record.chenhlech"/><br/>
+                        <h2>
+                            <span t-raw="record.canhbao_badges_chenhlechs"/>
+                        </h2>
+                    </div>
+                </templates>
+            </timeline>
+        </field>
+    </record>
+    <record id="kehoachsanxuat_gantt_view" model="ir.ui.view">
+        <field name="name">kehoachsanxuat.gantt</field>
+        <field name="model">kehoach.sanxuat</field>
+        <field name="type">gantt</field>
+        <field name="arch" type="xml">
+            <gantt date_start="thoigian_batdau"
+                   date_stop="thoigian_ketthuc"
+                   default_group_by="kh_may_id"
+                   default_scale="week"
+                   scales="day,week,month,year"
+                   precision="{'day': 'hour:full', 'week': 'day:full', 'month': 'day:full', 'year': 'day:full'}"
+                   string="sanpham">
+                <field name="donhangchitiet_id"/>
+            </gantt>
+        </field>
+    </record>
+    <record id="kehoachsanxuat_calendar_view" model="ir.ui.view">
+        <field name="name">kehoachsanxuat.calendar</field>
+        <field name="model">kehoach.sanxuat</field>
+        <field eval="2" name="priority"/>
+        <field name="arch" type="xml">
+            <calendar date_start="thoigian_batdau" date_stop="thoigian_ketthuc"
+                      event_limit="5" quick_add="False">
+                <field name="donhang"/>
+                <field name="sanpham"/>
+                <field name="kh_may_id"/>
+                <field name="khoiluong_dukien"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="kehoachsanxuat_form_view" model="ir.ui.view">
+        <field name="name">hehoachsanxuat.form</field>
+        <field name="model">kehoach.sanxuat</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="lenhsx_ids"/>
+                        </group>
+                        <group>
+                            <field name="donhang"/>
+                        </group>
+                        <group>
+                            <field name="donhangchitiet_id"/>
+                            <field name="masx"/>
+                        </group>
+                        <group>
+                            <field name="kh_may_id"/>
+                        </group>
+                        <group>
+                            <field name="ngay"/>
+                        </group>
+                        <group>
+                            <field name="thoigian_batdau" widget="datetime"/>
+                        </group>
+                        <group>
+                            <field name="thoigian_dukien"/>
+                        </group>
+                        <group>
+                            <field name="khoiluong_dukien"/>
+                        </group>
+                        <group>
+                            <field name="khoiluong_thucte" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="chenhlech"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="kehoachsanxuat_search_view" model="ir.ui.view">
+        <field name="name">kehoachsanxuat.search</field>
+        <field name="model">kehoach.sanxuat</field>
+        <field name="arch" type="xml">
+            <search string="Bảng phân bổ kế hoạch">
+                <field name="lenhsx_ids"/>
+                <field name="donhangchitiet_id"/>
+                <field name="kh_may_id"/>
+                <field name="ngay"/>
+                <field name="khoiluong_dukien"/>
+                <field name="khoiluong_thucte"/>
+                <field name="chenhlech"/>
+                <group expand="0" string="Group By">
+                    <filter string="Máy chạy" name="may_group" context="{'group_by': 'kh_may_id'}"/>
+                    <filter string="Đơn hàng" name="donhang_group" context="{'group_by': 'donhang'}"/>
+                    <filter string="Sản phẩm" name="sanpham_group" context="{'group_by': 'sanpham'}"/>
+                    <filter string="Ngày" name="ngay_group" context="{'group_by': 'ngay'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="kehoachsanxuat_list_view" model="ir.ui.view">
+        <field name="name">kehoachsanxuat.list</field>
+        <field name="model">kehoach.sanxuat</field>
+        <field name="arch" type="xml">
+            <tree string="Bảng phân bổ kế hoạch">
+                <header>
+                    <button name="action_gan_lenh" type="object" string="Gắn lệnh" class="btn-primary"/>
+                </header>
+                <field name="lenhsx_ids" optional="show"/>
+                <field name="donhang" optional="show"/>
+                <field name="donhangchitiet_id" optional="show"/>
+                <field name="masx" optional="show"/>
+                <field name="kh_may_id" optional="show"/>
+                <field name="ngay" optional="show"/>
+                <field name="thoigian_batdau" optional="show"/>
+                <field name="thoigian_dukien" optional="show"/>
+                <field name="khoiluong_dukien" optional="show"/>
+                <field name="khoiluong_thucte" optional="show"/>
+                <field name="chenhlech" optional="show"/>
+                <field name="canhbao_badges_chenhlech" string="Thời gian chậm giao" widget="html" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_chon_lenhsx_form" model="ir.ui.view">
+        <field name="name">chon.lenhsx.form</field>
+        <field name="model">ganlenh.sanxuat</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <group>
+                    <field name="lenhsx_ids"/>
+                </group>
+                <footer>
+                    <button string="Chọn" type="object" name="trigger_default_lenhsx_ids" class="btn-primary"/>
+                    <button string="Hủy" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="message_success_gan_lenh_form_view" model="ir.ui.view">
+        <field name="name">message.success.form</field>
+        <field name="model">ganlenh.sanxuat</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <footer>
+                    <button string="Đã gắn lệnh sản xuất thành công!" type="object" name="reload_list_view"
+                            class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--        action-->
+    <record id="action_kehoachsanxuat_form" model="ir.actions.act_window">
+        <field name="name">Bảng phân bổ kế hoạch</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">kehoach.sanxuat</field>
+        <field name="context">{'search_default_may_group': 1, 'search_default_donhang_group': 1}</field>
+        <field name="view_mode">form,tree,timeline</field>
+        <field name="search_view_id" ref="kehoachsanxuat_search_view"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('kehoachsanxuat_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('kehoachsanxuat_form_view')})]"/>
+    </record>
+
+    <!--    menu-->
+    <menuitem id="kehoachsanxuat_menu"
+              action="action_kehoachsanxuat_form"
+              name="Bảng phân bổ kế hoạch"
+              parent="hoat_dong_menu_root"
+              sequence="3"/>
+</odoo>

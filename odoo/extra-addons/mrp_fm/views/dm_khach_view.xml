@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="dm_khach_form_view" model="ir.ui.view">
+        <field name="name">dm.khach.form</field>
+        <field name="model">dm.khach</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <field name="makhach"/>
+                        <field name="tenkhach"/>
+                        <field name="phanloaikhach"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="sodienthoai"/>
+                            <field name="diachi"/>
+                            <field name="email"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page id="code_filler" name="codefiller"
+                              string="Code Filler">
+                            <field name="code_filler" widget="one2many">
+                                <tree editable="bottom">
+                                    <field name="code_filler" optional="show"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="dm_khach_search_view" model="ir.ui.view">
+        <field name="name">dm.khach.search</field>
+        <field name="model">dm.khach</field>
+        <field name="arch" type="xml">
+            <search string="Khách hàng">
+                <field name="makhach"/>
+                <field name="tenkhach"/>
+                <field name="diachi"/>
+                <field name="sodienthoai"/>
+                <field name="email"/>
+                <field name="code_filler" widget="many2many_tags"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="dm_khach_list_view" model="ir.ui.view">
+        <field name="name">dm.khach.list</field>
+        <field name="model">dm.khach</field>
+        <field name="arch" type="xml">
+            <tree string="Khách hàng">
+                <field name="makhach" optional="show"/>
+                <field name="tenkhach" optional="show"/>
+                <field name="code_filler" optional="show" widget="many2many_tags"/>
+                <field name="diachi" optional="show"/>
+                <field name="sodienthoai" optional="show"/>
+                <field name="email" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    action-->
+    <record id="action_dm_khach_form" model="ir.actions.act_window">
+        <field name="name">Danh mục khách hàng</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">dm.khach</field>
+        <field name="view_mode">kanban,form,tree</field>
+        <field name="search_view_id" ref="dm_khach_search_view"/>
+        <field name="view_id" ref="dm_khach_list_view"/>
+    </record>
+
+    <!--    menu-->
+    <menuitem id="dm_khach_menu"
+              action="action_dm_khach_form"
+              name="Danh mục khách hàng"
+              parent="danh_muc_menu_root"
+              sequence="10"/>
+</odoo>

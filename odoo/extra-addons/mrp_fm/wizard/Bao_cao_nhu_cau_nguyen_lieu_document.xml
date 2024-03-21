@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <template id="bao_cao_nhu_cau_nguyen_lieu_document">
+        <t t-call="web.html_container">
+            <t t-call="web.report_layout">
+                <meta charset="utf-8"/>
+                <!--                <t t-call="web.basic_layout">-->
+                <link rel="stylesheet" href="/base_inheritance/static/src/css/style.css"/>
+                <div class="page" style="font-family :Arial !important;">
+                    <div class="oe_structure"/>
+                    <br/>
+                    <h2 style="width:100%; text-align:center;font-weight: 550;font-size: 40px;text-transform: uppercase;"
+                        class="text-center bold"><center>BÁO CÁO NHU CẦU NGUYÊN LIỆU</center></h2>
+                    <span class="text-center bold">
+                        <center>
+                            <t t-if="date_start">
+                                <span class="text-center bold"><strong>Từ ngày: <t
+                                        t-esc="date_start"/></strong></span>
+                            </t>
+                            <t t-if="date_start and date_end">
+                                <span class="text-center bold"><strong> - </strong></span>
+                            </t>
+                            <t t-if="date_end">
+                                <span class="text-center bold"><strong>Đến ngày: <t t-esc="date_end"/></strong></span>
+                            </t>
+                            <br/>
+                            <t t-if="donhang">
+                                <span class="text-center bold"><strong>Đơn hàng: <t
+                                        t-esc="donhang"/></strong></span>
+                                <br/>
+                            </t>
+                            <t t-if="sanpham">
+                                <span class="text-center bold"><strong>Sản phẩm: <t
+                                        t-esc="sanpham"/></strong></span>
+                                <br/>
+                            </t>
+                            <t t-if="khachhang">
+                                <span class="text-center bold"><strong>Khách hàng: <t
+                                        t-esc="khachhang"/></strong></span>
+                                <br/>
+                            </t>
+                        </center>
+                    </span>
+                    <br/>
+                    <div>
+                        <table class="table-bordered"
+                               style="border-collapse: collapse; width : 100%; border : border-box;">
+                            <thead>
+                                <tr>
+                                    <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                        class="text-center">STT</th>
+                                    <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                        class="text-center">Mã nguyên liệu</th>
+                                    <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                        class="text-center">Tên nguyên liệu</th>
+                                    <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                        class="text-center">Khối lượng</th>
+                                </tr>
+                            </thead>
+                            <tbody class="sale_tbody">
+                                <t t-set="i" t-value="1"/>
+                                <t t-foreach="docs" t-as="o">
+                                    <tr>
+                                        <td class="text-center"
+                                            style="text-align: center;padding : 8px;border: 1px solid black;">
+                                            <span t-esc="i"/>
+                                            <t t-set="i" t-value="i+1"/>
+                                        </td>
+                                        <td class="text-left"
+                                            style="text-align: left;padding : 8px;border: 1px solid black;">
+                                            <span t-field="o.nguyenlieu"/>
+                                        </td>
+                                        <td class="text-left"
+                                            style="text-align: left;padding : 8px;border: 1px solid black;">
+                                            <span t-field="o.tennguyenlieu"/>
+                                        </td>
+                                        <td class="text-center"
+                                            style="text-align: left;padding : 8px;border: 1px solid black;">
+                                            <span t-field="o.khoiluong"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="nhiet_do_khoang_nhiet_form_view" model="ir.ui.view">
+        <field name="name">nhiet.do.form</field>
+        <field name="model">nhiet.do</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <field name="ma"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="dh1"/>
+                        </group>
+                        <group>
+                            <field name="dh2"/>
+                        </group>
+                        <group>
+                            <field name="dh3"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="dh4"/>
+                        </group>
+                        <group>
+                            <field name="dh5"/>
+                        </group>
+                        <group>
+                            <field name="dh6"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="dh7"/>
+                        </group>
+                        <group>
+                            <field name="dh8"/>
+                        </group>
+                        <group>
+                            <field name="dh9"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="dh10"/>
+                        </group>
+                        <group>
+                            <field name="dh11"/>
+                        </group>
+                        <group>
+                            <field name="dh12"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="dh13"/>
+                        </group>
+                        <group>
+                            <field name="dh14"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nhiet_do_khoang_nhiet_search_view" model="ir.ui.view">
+        <field name="name">nhiet.do.search</field>
+        <field name="model">nhiet.do</field>
+        <field name="arch" type="xml">
+            <search string="Nhiệt độ khoang nhiệt">
+            </search>
+        </field>
+    </record>
+
+    <record id="nhiet_do_khoang_nhiet_list_view" model="ir.ui.view">
+        <field name="name">nhiet.do.list</field>
+        <field name="model">nhiet.do</field>
+        <field name="arch" type="xml">
+            <tree string="Nhiệt độ khoang nhiệt">
+                <field name="ma" optional="show"/>
+                <field name="dh1" optional="show"/>
+                <field name="dh2" optional="show"/>
+                <field name="dh3" optional="show"/>
+                <field name="dh4" optional="show"/>
+                <field name="dh5" optional="show"/>
+                <field name="dh6" optional="show"/>
+                <field name="dh7" optional="show"/>
+                <field name="dh8" optional="show"/>
+                <field name="dh9" optional="show"/>
+                <field name="dh10" optional="show"/>
+                <field name="dh11" optional="show"/>
+                <field name="dh12" optional="show"/>
+                <field name="dh13" optional="show"/>
+                <field name="dh14" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    action-->
+    <record id="action_nhiet_do_khoang_nhiet_form" model="ir.actions.act_window">
+        <field name="name">Nhiệt độ khoang nhiệt</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nhiet.do</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="nhiet_do_khoang_nhiet_search_view"/>
+        <field name="view_id" ref="nhiet_do_khoang_nhiet_list_view"/>
+    </record>
+
+    <!--    menu-->
+    <menuitem id="nhiet_do_khoang_nhiet_menu"
+              action="action_nhiet_do_khoang_nhiet_form"
+              name="Nhiệt độ khoang nhiệt"
+              parent="thiet_lap_menu_root"
+              sequence="3"/>
+</odoo>

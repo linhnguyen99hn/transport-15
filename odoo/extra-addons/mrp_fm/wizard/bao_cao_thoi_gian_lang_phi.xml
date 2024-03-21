@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record model="ir.ui.view" id="bao_cao_tg_lang_phi_pivot">
+        <field name="name">bao.cao.tg.lang.phi.pivot</field>
+        <field name="model">kehoach.sanxuat</field>
+        <field name="arch" type="xml">
+            <pivot string="Báo cáo thời gian lãng phí" sample="1">
+                <field name="donhang" type="row"/>
+                <field name="lenhsx_ids" type="row"/>
+                <field name="ngay" type="col" interval="month"/>
+                <field name="thoigian_dungnghihetca" string="Thời gian dừng nghỉ hết ca" type="measure"/>
+                <field name="thoigian_dungtheokh" string="Thời gian dừng theo kế hoạch" type="measure"/>
+                <field name="thoigian_dungsucokhac" string="Thời gian dừng sự cố khác" type="measure"/>
+                <field name="thoigian_dungkithuat" string="Thời gian dừng kĩ thuật" type="measure"/>
+                <field name="thoigian_haophi" string="Thời gian hao phí" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="bao_cao_tg_lang_phi_action" model="ir.actions.act_window">
+        <field name="name">Báo cáo thời gian lãng phí</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">kehoach.sanxuat</field>
+        <field name="view_mode">tree,kanban,form,pivot,graph</field>
+        <field name="view_id" ref="bao_cao_tg_lang_phi_pivot"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Không tìm thấy dữ liệu phù hợp
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="bao_cao_tg_lang_phi"
+              name="Báo cáo thời gian lãng phí"
+              action="bao_cao_tg_lang_phi_action"
+              parent="bao_cao_menu_root"
+              sequence="6"/>
+</odoo>

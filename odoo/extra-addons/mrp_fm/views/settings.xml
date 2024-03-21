@@ -1,0 +1,166 @@
+<odoo>
+    <data>
+
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.base.setup</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="0"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="Mrp FM" string="Mrp FM" data-key="mrp_fm">
+                        <h2>Mrp FM</h2>
+                        <div class="row mt16 o_settings_container" name="mrp_fm">
+                            <div class="col-12 row">
+                                <div class="form-group col-sm-6 col-md-4 col-xl-3">
+                                    <label for="sophutlapkehoach" string="Số phút lập kế hoạch" class="o_light_label"/>
+                                    <field name="sophutlapkehoach" widget="float" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-6 col-md-4 col-xl-3">
+                                    <label for="sogiochuyendoi" string="Số giờ chuyển đổi" class="o_light_label"/>
+                                    <field name="sogiochuyendoi" widget="float" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-6 col-md-4 col-xl-3">
+                                    <label for="sogiolamviec" string="Số giờ làm việc" class="o_light_label"/>
+                                    <field name="sogiolamviec" widget="float" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <p class="h4 col-12">Chức Danh Ký</p>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tonggiamdoc" string="Tổng Giám Đốc" class="o_light_label"/>
+                                    <field name="tonggiamdoc" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="gdcongnghe" string="GĐ Công Nghệ" class="o_light_label"/>
+                                    <field name="gdcongnghe" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="gdsanxuat" string="GĐ Sản Xuất" class="o_light_label"/>
+                                    <field name="gdsanxuat" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="ketoan" string="Kế Toán" class="o_light_label"/>
+                                    <field name="ketoan" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tpcongnghe" string="TP Công Nghệ" class="o_light_label"/>
+                                    <field name="tpcongnghe" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tpsanxuat" string="TP Sản Xuất" class="o_light_label"/>
+                                    <field name="tpsanxuat" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tphtkh" string="TP Hỗ Trợ Khách Hàng" class="o_light_label"/>
+                                    <field name="tphtkh" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tttsanxuat" string="TT Tổ Sản Xuất" class="o_light_label"/>
+                                    <field name="tttsanxuat" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="ttpremix" string="TT Premix" class="o_light_label"/>
+                                    <field name="ttpremix" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="psale" string="Phòng Sale" class="o_light_label"/>
+                                    <field name="psale" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="bophandonggoi" string="Bộ Phận Đóng Gói" class="o_light_label"/>
+                                    <field name="bophandonggoi" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="bophanhoanthien" string="Bộ Phận Hoàn Thiện" class="o_light_label"/>
+                                    <field name="bophanhoanthien" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="truongcasx" string="Trưởng Ca Sản Xuất" class="o_light_label"/>
+                                    <field name="truongcasx" widget="char" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="col-12">
+                                    <h1>Tên chức danh ký</h1>
+                                </div>
+
+                                <br/>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tentonggiamdoc" string="Tên Tổng Giám Đốc" class="o_light_label"/>
+                                    <field name="tentonggiamdoc" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tengdsanxuat" string="Tên GĐ Sản Xuất" class="o_light_label"/>
+                                    <field name="tengdsanxuat" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tengdcongnghe" string="Tên GĐ Công nghệ" class="o_light_label"/>
+                                    <field name="tengdcongnghe" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tentpsanxuat" string="Tên TP Sản xuất" class="o_light_label"/>
+                                    <field name="tentpsanxuat" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tenketoan" string="Tên kế toán" class="o_light_label"/>
+                                    <field name="tenketoan" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tentphtkh" string="Tên TP Hỗ trợ KH" class="o_light_label"/>
+                                    <field name="tentphtkh" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tentpcongnghe" string="Tên TP Công Nghệ" class="o_light_label"/>
+                                    <field name="tentpcongnghe" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tenttpremix" string="Tên TT Premix" class="o_light_label"/>
+                                    <field name="tenttpremix" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tenphongsale" string="Tên phòng sale" class="o_light_label"/>
+                                    <field name="tenphongsale" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tenbophandonggoi" string="Tên Bộ Phận Đóng Gói" class="o_light_label"/>
+                                    <field name="tenbophandonggoi" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tenbophanhoanthien" string="Tên Bộ Phận Hoàn Thiện"
+                                           class="o_light_label"/>
+                                    <field name="tenbophanhoanthien" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tentruongcasx" string="Tên Trưởng Ca Sản Xuất" class="o_light_label"/>
+                                    <field name="tentruongcasx" widget="char" class="form-control"/>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-xl-4">
+                                    <label for="tennguoilap" string="Tên Người lập" class="o_light_label"/>
+                                    <field name="tennguoilap" widget="char" class="form-control"/>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_mrp_fm_config_settings" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="res_config_settings_view_form"/>
+            <field name="target">inline</field>
+            <field name="context">{'module': 'mrp_fm'}</field>
+        </record>
+
+        <menuitem id="mrp_fm_config_settings"
+                  name="Tham số hệ thống"
+                  parent="mrp_fm.thiet_lap_menu_root"
+                  action="action_mrp_fm_config_settings"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="report_bao_cao_nguyen_lieu_xuat" model="ir.ui.view">
+        <field name="name">bao.cao.nguyen.lieu.xuat.form</field>
+        <field name="model">bao.cao.nguyen.lieu.xuat</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_start" string="Từ ngày" widget="date"/>
+                            <field name="nguyenlieu_ids" string="Nguyên liệu" widget="many2one"/>
+                        </group>
+                        <group>
+                            <field name="date_end" string="Đến ngày" widget="date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="get_report" type="object" string="Lập báo cáo" class="oe_highlight"/>
+                        <button string="Hủy" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="bao_cao_nguyen_lieu_xuat_form" model="ir.actions.act_window">
+        <field name="name">Báo cáo doanh số bán hàng</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bao.cao.nguyen.lieu.xuat</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="report_bao_cao_nguyen_lieu_xuat"/>
+    </record>
+
+    <menuitem id="bao_cao_nguyen_lieu_xuat"
+              parent="bao_cao_menu_root"
+              action="bao_cao_nguyen_lieu_xuat_form"
+              name="Báo cáo nguyên liệu xuất"
+              sequence="7"/>
+    <data>
+        <record id="action_bao_cao_nguyen_lieu_xuat" model="ir.actions.report">
+            <field name="name">Báo cáo nguyên liệu xuất</field>
+            <field name="model">bao.cao.nguyen.lieu.xuat</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">mrp_fm.bao_cao_nguyen_lieu_xuat_document</field>
+            <field name="report_file">mrp_fm.bao_cao_nguyen_lieu_xuat_document</field>
+            <field name="print_report_name">Báo cáo nguyên liệu xuất</field>
+            <field name="binding_model_id" ref="mrp_fm.model_report_mrp_fm_bao_cao_nguyen_lieu_xuat_document"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+
+</odoo>

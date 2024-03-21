@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <template id="lenh_tao_hat_document">
+        <t t-call="web.html_container">
+            <t t-call="web.report_layout" class="container-fluid p-0">
+                <meta charset="utf-8"/>
+                <t t-call="web.basic_layout">
+                    <link rel="stylesheet" href="/base_inheritance/static/src/css/style.css"/>
+                    <style>
+                        @media only screen and (max-width: 576px) {
+                            .responsive .table {
+                                font-size: smaller;
+                                white-space: nowrap;
+                            }
+
+                            .responsive-1 .responsive-table-1 {
+                                white-space: nowrap;
+                                font-size: smaller;
+                                white-space: nowrap;
+                                min-width: 100%;
+                            }
+
+                            .responsive-table-4 {
+                                font-size: smaller;
+                                white-space: nowrap;
+                                font-size: smaller;
+                                min-width: 800px;
+                            }
+                        }
+
+                        @media only screen and (max-width: 800px) {
+                            .responsive table {
+                                font-size: smaller;
+                                white-space: nowrap;
+                            }
+
+                            .responsive-1 .responsive-table-1 {
+                                white-space: nowrap;
+                                font-size: smaller;
+                                min-width: 100%;
+                            }
+
+                            .responsive-table-4 {
+                                font-size: smaller;
+                                white-space: nowrap;
+                                font-size: smaller;
+                                min-width: 800px;
+                            }
+                        }
+
+                        @media only screen and (max-width: 990px) {
+                            .responsive table {
+                                font-size: smaller;
+                                white-space: nowrap;
+                            }
+
+                            .responsive-1 responsive-table-1 {
+                                white-space: nowrap;
+                                font-size: smaller;
+                                min-width: 100%;
+                            }
+
+                            .responsive-table-4 {
+                                font-size: smaller;
+                                white-space: nowrap;
+                                font-size: smaller;
+                                width: 100%;
+                            }
+                        }
+
+                        @media only screen and (max-width: 1200px) {
+                            .responsive table {
+                                font-size: smaller;
+                            }
+
+                            .responsive-table-4 {
+                                font-size: smaller;
+                                white-space: nowrap;
+                                font-size: smaller;
+                                width: 100%;
+                            }
+                        }
+
+                        @media only screen and (min-width: 1200px) {
+                            .responsive table {
+                                font-size: smaller;
+                            }
+
+                            .responsive-1 .responsive-table-1 {
+                                font-size: smaller;
+                                white-space: nowrap;
+                                font-size: smaller;
+                                width: 100%;
+                            }
+                        }
+
+                        tr, td, th {
+                            page-break-inside: auto;
+                            margin-bottom: 5px; /* Giảm khoảng cách đáy nếu cần */
+                        }
+
+                        .table tr {
+                            height: auto;
+                        }
+
+                        .table td, .table th {
+                            padding: 4px; /* Giảm nếu đệm quá lớn */
+                        }
+
+                        .table {
+                            page-break-after: auto;
+                            width: auto; /* Nếu muốn bảng chỉ chiếm không gian cần thiết */
+                        }
+
+                        @page {
+                            size: A4 portrait;
+                            margin: 20mm 10mm 20mm 10mm; /* Điều chỉnh lề trang */
+                        }
+                    </style>
+                    <div class="page p-0"
+                         style="font-family :Time New Roman !important;margin-right:4%; margin-left:4%;">
+                        <div class="oe_structure"/>
+                        <div class="col-sm-12 col-md-12 p-0">
+                            <h2 style="width:100%; text-align:center; font-weight: 550; font-size: 30px; text-transform: uppercase; margin: 25px 0px;"
+                                class="text-center bold">
+                                <center>LỆNH TẠO HẠT</center>
+                            </h2>
+                        </div>
+                        <div class="table-responsive-sm table-responsive-md">
+                            <table class="responsive-table-4"
+                                   style="table-layout: fixed; font-family : Time New Roman; margin: 30px 0px;  width: 100%;">
+                                <tr>
+                                    <th style="text-align: left; padding: 0rem;">
+                                        <span class="text-center bold">
+                                            <strong>Lệnh số:
+                                                <t t-esc="lenhsx"/>
+                                            </strong>
+                                            <br/>
+                                            <strong>Máy:
+                                                <t t-esc="may"/>
+                                            </strong>
+                                            <br/>
+                                            <strong>Tổng số mẻ:
+                                                <t t-esc="soluongme"/>
+                                            </strong>
+                                        </span>
+                                    </th>
+                                    <th style="text-align: left; padding: 0rem;">
+                                        <span class="text-center bold">
+                                            <strong>Mã sản xuất:
+                                                <t t-esc="manoibo"/>
+                                            </strong>
+                                            <br/>
+                                            <strong>Lô sản xuất:</strong>
+                                            <br/>
+                                            <strong>Khối lượng một mẻ:
+                                                <t t-esc="khoiluongmotme"/>
+                                            </strong>
+                                        </span>
+                                    </th>
+                                    <th style="text-align: left; padding: 0rem;">
+                                        <span class="text-center bold" style="text-align : right;">
+                                            <strong>Ngày sản
+                                                xuất:
+                                            </strong>
+                                            <br/>
+                                            <strong>Ngày hoàn thành:</strong>
+                                        </span>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <!--Tiêu chuẩn thiết bị-->
+                            <div>
+                                <left>
+                                    <h3 style="margin: 20px 0px;">I.Thông số tiêu chuẩn các thiết bị</h3>
+                                </left>
+                                <div class="table-responsive-sm table-responsive-md responsive-1">
+                                    <table class="table-bordered responsive-table-1"
+                                           style="border-collapse: collapse; border : border-box;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">STT.
+                                                </th>
+                                                <th style="background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">Nội dung
+                                                </th>
+                                                <th style="background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">Thông số tiêu chuẩn
+                                                </th>
+                                                <th style="background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">Ghi chú
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="sale_tbody">
+                                            <tr>
+                                                <td class="text-center"
+                                                    style="text-align: center;padding : 4px;border: 1px solid black;">
+                                                    <span>
+                                                        <strong>1</strong>
+                                                    </span>
+                                                </td>
+                                                <td class="text-left"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>Tốc độ cấp liệu</span>
+                                                </td>
+                                                <t t-if="not tocdocaplieu or tocdocaplieu==0">
+                                                    <td class="text-center"
+                                                        style="text-align: right;padding : 4px;border: 1px solid black;">
+                                                    </td>
+                                                </t>
+                                                <t t-else="tocdocaplieu">
+                                                    <td class="text-center"
+                                                        style="text-align: right;padding : 4px;border: 1px solid black;">
+                                                        <span t-esc="tocdocaplieu"/>
+                                                    </td>
+                                                </t>
+
+                                                <td class="text-left"
+                                                    style="text-align: right;padding : 4px;border: 1px solid black;">
+                                                    <span t-esc="ghichu1"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center"
+                                                    style="text-align: center;padding : 4px;border: 1px solid black;">
+                                                    <span>
+                                                        <strong>2</strong>
+                                                    </span>
+                                                </td>
+                                                <td class="text-left"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>Tốc độ trục vít</span>
+                                                </td>
+                                                <t t-if="not tocdotrucvit or tocdotrucvit==0">
+                                                    <td class="text-center"
+                                                        style="text-align: right;padding : 4px;border: 1px solid black;">
+                                                    </td>
+                                                </t>
+                                                <t t-else="tocdotrucvit">
+                                                    <td class="text-center"
+                                                        style="text-align: right;padding : 4px;border: 1px solid black;">
+                                                        <span t-esc="tocdotrucvit"/>
+                                                    </td>
+                                                </t>
+                                                <td class="text-left"
+                                                    style="text-align: right;padding : 4px;border: 1px solid black;">
+                                                    <span t-esc="ghichu2"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center"
+                                                    style="text-align: center;padding : 4px;border: 1px solid black;">
+                                                    <span>
+                                                        <strong>3</strong>
+                                                    </span>
+                                                </td>
+                                                <td class="text-left"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <span>Dòng máy</span>
+                                                </td>
+                                                <t t-if="not tocdogiaocat or tocdogiaocat==0">
+                                                    <td class="text-center"
+                                                        style="text-align: right;padding : 4px;border: 1px solid black;">
+                                                    </td>
+                                                </t>
+                                                <t t-if="tocdogiaocat">
+                                                    <td class="text-center"
+                                                        style="text-align: right;padding : 4px;border: 1px solid black;">
+                                                        <span t-esc="tocdogiaocat"/>
+                                                    </td>
+                                                </t>
+
+                                                <td class="text-left"
+                                                    style="text-align: right;padding : 4px;border: 1px solid black;">
+                                                    <span t-esc="ghichu3"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--Nhiệt độ khoang nhiệt-->
+                            <div>
+                                <left>
+                                    <h3 style="margin: 20px 0px;">II.Nhiệt độ tiêu chuẩn các khoang nhiệt</h3>
+                                </left>
+                                <div class="table-responsive-sm table-responsive-md responsive-1">
+                                    <table class="table-bordered table-responsive-md responsive-table-1"
+                                           style="border-collapse: collapse; border : border-box;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH01
+                                                </th>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH02
+                                                </th>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH03
+                                                </th>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH04
+                                                </th>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH05
+                                                </th>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH06
+                                                </th>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH07
+                                                </th>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH08
+                                                </th>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH09
+                                                </th>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH10
+                                                </th>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH11
+                                                </th>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH12
+                                                </th>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH13
+                                                </th>
+                                                <th style="width :3%;background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">DH14
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="sale_tbody">
+                                            <tr>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;height: 10px">
+                                                    <t t-if="not dh1 or dh1==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh1">
+                                                        <span t-esc="dh1"/>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <t t-if="not dh2 or dh2==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh2">
+                                                        <span t-esc="dh2"/>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <t t-if="not dh3 or dh3==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh3">
+                                                        <span t-esc="dh3"/>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <t t-if="not dh4 or dh4==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh4">
+                                                        <span t-esc="dh4"/>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <t t-if="not dh5 or dh5==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh5">
+                                                        <span t-esc="dh5"/>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <t t-if="not dh6 or dh6==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh6">
+                                                        <span t-esc="dh6"/>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <t t-if="not dh7 or dh7==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh7">
+                                                        <span t-esc="dh7"/>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <t t-if="not dh8 or dh8==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh8">
+                                                        <span t-esc="dh8"/>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <t t-if="not dh9 or dh9==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh9">
+                                                        <span t-esc="dh9"/>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <t t-if="not dh10 or dh10==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh10">
+                                                        <span t-esc="dh10"/>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <t t-if="not dh11 or dh11==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh11">
+                                                        <span t-esc="dh11"/>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <t t-if="not dh12 or dh12==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh12">
+                                                        <span t-esc="dh12"/>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <t t-if="not dh13 or dh13==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh13">
+                                                        <span t-esc="dh13"/>
+                                                    </t>
+                                                </td>
+                                                <td class="text-center"
+                                                    style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                    <t t-if="not dh14 or dh14==0">
+                                                        <span>&amp;nbsp;</span>
+                                                    </t>
+                                                    <t t-else="dh14">
+                                                        <span t-esc="dh14"/>
+                                                    </t>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--tiêu chuẩn sản phẩm-->
+                            <div>
+                                <left>
+                                    <h3 style="margin: 20px 0px;">III.Tiêu chuẩn sản phẩm</h3>
+                                </left>
+                                <div class="responsive-1">
+                                    <table class="table"
+                                           style="border-collapse: collapse; border : border-box;">
+                                        <thead>
+                                            <tr>
+                                                <th style="background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">STT
+                                                </th>
+                                                <th style="background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">Nội dung kiểm tra
+                                                </th>
+                                                <th style="background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">Tiêu chuẩn sản phẩm
+                                                </th>
+                                                <th style="background-color: white; color: black; border: 1px solid black; padding : 4px;border: 1px solid black;border: 1px solid black;"
+                                                    class="text-center">Ghi chú
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="sale_tbody">
+                                            <t t-set="i" t-value="1"/>
+                                            <t t-foreach="docs1" t-as="l">
+                                                <tr>
+                                                    <td style="width :3%; text-align: center;padding : 4px;border: 1px solid black;">
+                                                        <t t-if="i">
+                                                            <span t-esc="i"/>
+                                                            <t t-set="i" t-value="i+1"/>
+                                                        </t>
+                                                        <t t-else="not i">
+                                                            <span>&amp;nbsp;</span>
+                                                        </t>
+
+                                                    </td>
+                                                    <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                        <t t-if="l.noidungkiemtra">
+                                                            <span t-field="l.noidungkiemtra"/>
+                                                        </t>
+                                                        <t t-else="not l.noidungkiemtra">
+                                                            <span>&amp;nbsp;</span>
+                                                        </t>
+
+                                                    </td>
+                                                    <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                        <t t-if="l.tieuchuansanpham">
+                                                            <span t-field="l.tieuchuansanpham"/>
+                                                        </t>
+                                                        <t t-else="not l.tieuchuansanpham">
+                                                            <span>&amp;nbsp;</span>
+                                                        </t>
+                                                    </td>
+                                                    <td style="text-align: left;padding : 4px;border: 1px solid black;">
+                                                        <t t-if="l.ghichu">
+                                                            <span t-field="l.ghichu"/>
+                                                        </t>
+                                                        <t t-else="not l.ghichu">
+                                                            <span>&amp;nbsp;</span>
+                                                        </t>
+
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="table-responsive-sm table-responsive-md responsive-4">
+                                <table class="responsive-table-4"
+                                       style="table-layout: fixed; font-family : Time New Roman; margin: 30px 0px;  width: 100%;">
+                                    <tr>
+                                        <th style="text-align:center;">
+                                            <span t-esc="parameters['tpsanxuat']"/>
+                                            <br/>
+                                            <span>
+                                                (Ký, họ tên)
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <span t-esc="parameters['tentpsanxuat']"/>
+                                        </th>
+                                        <th style="text-align:center;">
+                                            <span t-esc="parameters['tpcongnghe']"/>
+                                            <br/>
+                                            <span>
+                                                (Ký, họ tên)
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <span t-esc="parameters['tentpcongnghe']"/>
+                                        </th>
+                                        <th style="text-align:center;">
+                                            <span t-esc="parameters['gdcongnghe']"/>
+                                            <br/>
+                                            <span>
+                                                (Ký, họ tên)
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <span t-esc="parameters['tengdcongnghe']"/>
+                                        </th>
+                                        <th style="text-align:center;">
+                                            <span t-esc="parameters['gdsanxuat']"/>
+                                            <br/>
+                                            <span>
+                                                (ký, họ tên)
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <span t-esc="parameters['tengdsanxuat']"/>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="oe_structure"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

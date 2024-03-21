@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="bao_cao_bang_gia_document">
+        <t t-call="web.html_container">
+            <t t-call="web.report_layout">
+                <meta charset="utf-8"/>
+                <t t-call="web.basic_layout">
+                    <link rel="stylesheet" href="/base_inheritance/static/src/css/style.css"/>
+                    <div class="header"
+                         style="margin-right:4%; margin-left:4%;font-family : Time New Roman;">
+                        <table style="width: 100%;">
+                            <tr>
+                                <th>
+                                    <img src="/mrp_fm/static/src/img/logo_FM.png"
+                                         style="max-width: 50%; "/>
+                                </th>
+                                <th style="font:16px lucida-console,sans-serif !important ;
+                                                    ">
+                                    <span style="font-weight:bold; color: #307818;">FILLER MASTERBACTCHJOINT STOCK
+                                        COMPANY</span>
+                                    <br/>
+                                    <span>Southem Industrial Zone, Van Phu Commune, Yen Bai City, Yen Bai Province,
+                                        Vietnam</span>
+                                    <br/>
+                                    <span>3th Floor, Fafim Tower, 19 Nguyen Trai, Thanh Xuan District, Hanoi,
+                                        Vietnam</span>
+                                    <br/>
+                                    <span>Phone: (+84) 076909055 | Email: saleadmin@fillermasterbatch.vn | Website:
+                                        www.fillermasterbatch.vn</span>
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page"
+                             style="font-family :Time New Roman !important;margin-right:4%; margin-left:4%;">
+                            <div class="oe_structure"/>
+                            <br/>
+                            <h2 style="width:100%; text-align:center;font-weight: 550;font-size: 40px;text-transform: uppercase;"
+                                class="text-center bold"><center>Bảng Giá</center></h2>
+                            <br/>
+                            <div>
+                                <table style="width:100%; font-size : 18px;">
+                                    <tr>
+                                        <th style="width:30%; text-align:center;">
+                                            <span class="text-center bold"><strong>Tên bảng giá: <t
+                                                    t-esc="o.ten"/></strong></span>
+                                        </th>
+
+                                        <th style="width:30%; text-align:center;">
+                                            <span class="text-center bold" style="text-align : right;"><strong>Từ
+                                                ngày: <t
+                                                        t-esc="o.tungay"/></strong></span>
+                                        </th>
+                                        <th style="width:30%; text-align:center;">
+                                            <span class="text-center bold"><strong>Đến ngày:</strong><t
+                                                    t-esc="o.denngay"/></span>
+                                        </th>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <br/>
+                            <!--                            Nguyên liệu-->
+                            <br/>
+                            <div>
+                                <left>
+                                    <h3>Nguyên liệu</h3>
+                                </left>
+                                <table class="table-bordered"
+                                       style="border-collapse: collapse; width : 100%; border : border-box;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width :3%;background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">STT.</th>
+                                            <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Mã nguyên liệu</th>
+                                            <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Nguyên liệu</th>
+                                            <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">ĐVT</th>
+                                            <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Đơn giá</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="sale_tbody">
+                                        <t t-set="i" t-value="1"/>
+                                        <t t-foreach="o.gianguyenlieu" t-as="l">
+                                            <tr>
+                                                <td class="text-center"
+                                                    style="text-align: center;padding : 8px;border: 1px solid black;">
+                                                    <span t-esc="i"/>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </td>
+                                                <td style="text-align: left;padding : 8px;border: 1px solid black;">
+                                                    <span t-esc="l.nguyenlieu.manguyenlieu"/>
+                                                </td>
+                                                <td style="text-align: left;padding : 8px;border: 1px solid black;">
+                                                    <span t-esc="l.nguyenlieu.tennguyenlieu"/>
+                                                </td>
+                                                <td style="text-align: center;padding : 8px;border: 1px solid black;">
+                                                    <span t-esc="l.nguyenlieu.donvitinh.madonvitinh"/>
+                                                </td>
+                                                <td style="text-align: right;padding : 8px;border: 1px solid black;">
+                                                    <span t-esc="'{0:,.1f}'.format(l.dongia).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                                </td>
+
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div>
+
+                                <table style="width:100%; height: 100px ; font-size : 18px bold; font-family : Time New Roman;">
+                                    <tr>
+                                        <th style="text-align:center;">
+                                            <span>
+                                                Tổ trưởng tổ sản xuất
+                                            </span>
+                                            <br/>
+                                            <span>
+                                                (Ký, họ tên)
+                                            </span>
+                                        </th>
+                                        <th style="text-align:center;">
+                                            <span>
+                                                TP sản xuất
+                                            </span>
+                                            <br/>
+                                            <span>
+                                                (Ký, họ tên)
+                                            </span>
+                                        </th>
+                                        <th style="text-align:center;">
+                                            <span>
+                                                Giám đốc công nghệ
+                                            </span>
+                                            <br/>
+                                            <span>
+                                                (Ký, họ tên)
+                                            </span>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="oe_structure"/>
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

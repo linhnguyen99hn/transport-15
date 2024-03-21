@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="report_bao_cao_ket_qua_sx" model="ir.ui.view">
+        <field name="name">bao.cao.ket.qua.wizard.form</field>
+        <field name="model">bao.cao.ket.qua</field>
+        <field name="arch" type="xml">
+            <form string="Báo cáo kế quả sản xuất" create="false">
+                <sheet>
+                    <div class="row no-gutters">
+                       <div class="col-sm-12 col-md-4 col-xl-4 d-none d-sm-block1 d-none d-sm-block">
+                            <div class="d-flex justify-content-center align-items-center" style="width: 100%; padding: 0px 20px; height: 100%; display: flex; align-items: center;justify-content: center;">
+                                <img src="/web/binary/company_logo" alt="Logo" class="rounded img-fluid" style="width: 100%; padding: 0px 20px;"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-8 col-xl-8 row " style="padding: 15px 0px;">
+                            <div class="col-sm-12 col-md-12 col-xl-12" style="padding-bottom: 12px;">
+                                <center>
+                                    <h3>Báo Cáo Kế Quả Sản Xuất</h3>
+                                </center>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="date_start" string="Từ Ngày" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="date_start" widget="date" class="form-control"
+                                       style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="date_end" string="Đến Ngày" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="date_end" widget="date" class="form-control"
+                                       style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="khachhang" string="Khách Hàng" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="khachhang" widget="many2one" class="form-control"
+                                       style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="donhang" string="Đơn Hàng" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="donhang" class="form-control" widget="many2one" style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                                <label for="donhangchitiet_id" string="Sản Phẩm" class="o_light_label"
+                                       style="font-size: 12px; margin-bottom: 5px;"/>
+                                <field name="donhangchitiet_id" class="form-control" widget="many2one" style="height: 0px; padding: 0px;"/>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                <button name="get_report" type="object" string="Lập báo cáo" class="oe_highlight"/>
+                                <button string="Hủy" special="cancel"/>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="bao_cao_ket_qua_sx_form" model="ir.actions.act_window">
+        <field name="name">Báo cáo kết quả sản xuất</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bao.cao.ket.qua</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="report_bao_cao_ket_qua_sx"/>
+    </record>
+
+    <menuitem id="bao_cao_ket_qua_sx"
+              parent="bao_cao_menu_root"
+              action="bao_cao_ket_qua_sx_form"
+              name="Báo cáo kết quả sản xuất"
+              sequence="2"/>
+
+    <data>
+        <record id="action_bao_cao_ket_qua_sx" model="ir.actions.report">
+            <field name="name">Báo cáo kết quả sản xuất</field>
+            <field name="model">bao.cao.ket.qua</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">mrp_fm.bao_cao_ket_qua_sx_document</field>
+            <field name="report_file">mrp_fm.bao_cao_ket_qua_sx_document</field>
+            <field name="print_report_name">Báo cáo kết quả sản xuất</field>
+            <field name="binding_model_id" ref="model_report_mrp_fm_bao_cao_ket_qua_sx_document"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+
+</odoo>

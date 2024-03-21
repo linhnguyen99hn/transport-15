@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="thong_ke_form_view" model="ir.ui.view">
+        <field name="name">kehoach.sanxuat.form</field>
+        <field name="model">kehoach.sanxuat</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="ngay"/>
+                        </group>
+                        <group>
+                            <field name="sophieunhap"/>
+                        </group>
+                        <group>
+                            <field name="quyenso"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="lenhsx_ids"/>
+                        </group>
+                        <group>
+                            <field name="kh_may_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="masx"/>
+                        </group>
+                        <group>
+                            <field name="sanpham"/>
+                        </group>
+                    </group>
+                    <group string="Sản lượng">
+                        <group>
+                            <field name="khoiluong_dukien"/>
+                        </group>
+                        <group>
+                            <field name="khoiluong_thucte"/>
+                        </group>
+                        <group>
+                            <field name="chenhlech"/>
+                        </group>
+                    </group>
+                    <group string="Hiệu suất">
+                        <group>
+                            <field name="nangsuatbinhquan"/>
+                        </group>
+                        <group>
+                            <field name="phantramhoanthanh"/>
+                        </group>
+                    </group>
+                    <group string="Thời gian">
+                        <!--                        <group>-->
+                        <group>
+                            <field name="thoigian_batdau_thucte"/>
+<!--                        </group>-->
+<!--                        <group>-->
+                            <field name="thoigian_dungnghihetca"/>
+<!--                        </group>-->
+<!--                        <group>-->
+                            <field name="thoigian_dungtheokh"/>
+<!--                        </group>-->
+<!--                        <group>-->
+                            <field name="thoigian_haophi"/>
+                        </group>
+                        <!--                        </group>-->
+                        <!--                        <group>-->
+                        <group>
+                            <field name="thoigian_ketthuc_thucte"/>
+<!--                        </group>-->
+<!--                        <group>-->
+                            <field name="thoigian_dungsucokhac"/>
+<!--                        </group>-->
+<!--                        <group>-->
+                            <field name="thoigian_dungkithuat"/>
+<!--                        </group>-->
+<!--                        <group>-->
+                            <field name="ghichu"/>
+                        </group>
+                        <!--                        </group>-->
+                    </group>
+                    <group>
+                        <group>
+                            <field name="phe"/>
+                        </group>
+                        <group>
+                            <field name="ban_thanh_pham"/>
+                        </group>
+                        <group>
+                            <field name="hao_phi"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="thong_ke_search_view" model="ir.ui.view">
+        <field name="name">kehoach.sanxuat.search</field>
+        <field name="model">kehoach.sanxuat</field>
+        <field name="arch" type="xml">
+            <search string="Thống kê sản xuất">
+                <field name="ngay"/>
+                <field name="sophieunhap"/>
+                <field name="quyenso"/>
+                <field name="lenhsx_ids"/>
+                <field name="masx"/>
+                <field name="sanpham"/>
+                <field name="khoiluong_thucte"/>
+                <field name="ghichu"/>
+                <group expand="0" string="Group By">
+                    <filter string="Lệnh sản xuất" name="lenhsx_group" context="{'group_by': 'lenhsx_ids'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="thong_ke_list_view" model="ir.ui.view">
+        <field name="name">kehoach.sanxuat.list</field>
+        <field name="model">kehoach.sanxuat</field>
+        <field name="arch" type="xml">
+            <tree string="Thống kê sản xuất">
+                <field name="ngay" optional="show"/>
+                <field name="sophieunhap" optional="show"/>
+                <field name="quyenso" optional="show"/>
+                <field name="lenhsx_ids" optional="show"/>
+                <field name="masx" optional="show"/>
+                <field name="sanpham" optional="show"/>
+                <field name="thoigian_batdau_thucte" optional="show"/>
+                <field name="thoigian_ketthuc_thucte" optional="show"/>
+                <field name="khoiluong_dukien" optional="show"/>
+                <field name="khoiluong_thucte" optional="show"/>
+                <field name="chenhlech" optional="show"/>
+                <field name="ghichu" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    action-->
+    <record id="action_thong_ke_form" model="ir.actions.act_window">
+        <field name="name">Thống kê sản xuất</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">kehoach.sanxuat</field>
+        <field name="context">{'search_default_lenhsx_group': 1}</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="thong_ke_search_view"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('thong_ke_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('thong_ke_form_view')})]"/>
+    </record>
+
+    <!--    menu-->
+    <menuitem id="thong_ke_menu"
+              action="action_thong_ke_form"
+              name="Thống kê sản xuất"
+              parent="hoat_dong_menu_root"
+              sequence="5"/>
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record model="ir.ui.view" id="bao_cao_hieu_qua_pivot">
+        <field name="name">bao.cao.sx.pivot</field>
+        <field name="model">kehoach.sanxuat</field>
+        <field name="arch" type="xml">
+            <pivot string="Báo cáo sản xuất" sample="1">
+                <field name="donhang" type="row"/>
+                <field name="lenhsx_ids" type="row"/>
+                <field name="ngay" type="col" interval="month"/>
+                <field name="khoiluong_dukien" string="Khối lượng kế hoạch" type="measure"/>
+                <field name="khoiluong_thucte" string="Khối lượng sản xuất" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="bao_cao_hieu_qua_action" model="ir.actions.act_window">
+        <field name="name">Báo cáo đánh giá hiệu quả</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">kehoach.sanxuat</field>
+        <field name="view_mode">tree,kanban,form,pivot,graph</field>
+        <field name="view_id" ref="bao_cao_hieu_qua_pivot"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Không tìm thấy dữ liệu phù hợp
+            </p>
+        </field>
+    </record>
+
+<!--    <menuitem id="bao_cao_hieu_qua"-->
+<!--              name="Báo cáo tổng sản xuất"-->
+<!--              action="bao_cao_hieu_qua_action"-->
+<!--              parent="bao_cao_menu_root"-->
+<!--              sequence="4"/>-->
+</odoo>

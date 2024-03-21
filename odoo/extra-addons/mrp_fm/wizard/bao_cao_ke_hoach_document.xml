@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="bao_cao_ke_hoach_document">
+        <t t-call="web.report_layout" class="container-fluid p-0">
+            <meta charset="utf-8"/>
+            <link rel="stylesheet" href="/base_inheritance/static/src/css/style.css"/>
+            <style>
+                @media only screen and (max-width: 576px) {
+                .responsive .table {
+                font-size: smaller;
+                white-space: nowrap;
+                }
+                .responsive-1 .responsive-table-1 {
+                white-space: nowrap;
+                font-size: smaller;
+                white-space: nowrap;
+                min-width: 100%;
+                }
+                .responsive-table-4 {
+                font-size: smaller;
+                white-space: nowrap;
+                font-size: smaller;
+                min-width: 800px;
+                }
+                }
+
+                @media only screen and (max-width: 800px) {
+                .responsive table {
+                font-size: smaller;
+                white-space: nowrap;
+                }
+                .responsive-1 .responsive-table-1 {
+                white-space: nowrap;
+                font-size: smaller;
+                min-width: 100%;
+                }
+                .responsive-table-4 {
+                font-size: smaller;
+                white-space: nowrap;
+                font-size: smaller;
+                min-width: 800px;
+                }
+                }
+                @media only screen and (max-width: 990px) {
+                .responsive table{
+                font-size: smaller;
+                white-space: nowrap;
+                }
+                .responsive-1 responsive-table-1 {
+                white-space: nowrap;
+                font-size: smaller;
+                min-width: 100%;
+                }
+                .responsive-table-4 {
+                font-size: smaller;
+                white-space: nowrap;
+                font-size: smaller;
+                width: 100%;
+                }
+                }
+                @media only screen and (max-width: 1200px) {
+                .responsive table{
+                font-size: smaller;
+                }
+                .responsive-table-4 {
+                font-size: smaller;
+                white-space: nowrap;
+                font-size: smaller;
+                width: 100%;
+                }
+                }
+                @media only screen and (min-width: 1200px) {
+                .responsive table{
+                font-size: smaller;
+                }
+                .responsive-1 .responsive-table-1 {
+                font-size: smaller;
+                white-space: nowrap;
+                font-size: smaller;
+                width: 100%;
+                }
+                }
+            </style>
+            <div class="page p-0"
+                 style="font-family :Time New Roman !important;margin-right:4%; margin-left:4%;">
+                <div class="oe_structure">
+
+                    <div class="col-sm-12 col-md-12 p-0">
+                        <h2 style="width:100%; text-align:center;font-weight: 550;font-size: 30px;text-transform: uppercase; margin: 25px 0px;"
+                            class="text-center bold">
+                            <center>Báo Cáo Kế Hoạch Sản Xuất</center>
+                        </h2>
+                    </div>
+<!--                    <span class="text-center bold">-->
+<!--                        <center>-->
+<!--                            <t t-if="date_start">-->
+<!--                                <span class="text-center bold">-->
+<!--                                    <strong>Từ ngày:-->
+<!--                                        <t t-esc="date_start"/>-->
+<!--                                    </strong>-->
+<!--                                </span>-->
+<!--                            </t>-->
+<!--                            <t t-if="date_start and date_end">-->
+<!--                                <span class="text-center bold">-->
+<!--                                    <strong>-</strong>-->
+<!--                                </span>-->
+<!--                            </t>-->
+<!--                            <t t-if="date_end">-->
+<!--                                <span class="text-center bold">-->
+<!--                                    <strong>Đến ngày:-->
+<!--                                        <t t-esc="date_end"/>-->
+<!--                                    </strong>-->
+<!--                                </span>-->
+<!--                            </t>-->
+<!--                            <br/>-->
+<!--                            <t t-if="lenhsx">-->
+<!--                                <span class="text-center bold">-->
+<!--                                    <strong>Lệnh số:-->
+<!--                                        <t t-esc="lenhsx"/>-->
+<!--                                    </strong>-->
+<!--                                </span>-->
+<!--                            </t>-->
+<!--                            <br/>-->
+<!--                            <t t-if="may">-->
+<!--                                <span class="text-center bold">-->
+<!--                                    <strong>Máy:-->
+<!--                                        <t t-esc="may"/>-->
+<!--                                    </strong>-->
+<!--                                </span>-->
+<!--                            </t>-->
+<!--                            <br/>-->
+<!--                            <t t-if="madonhang">-->
+<!--                                <span class="text-center bold">-->
+<!--                                    <strong>Đơn hàng số:-->
+<!--                                        <t t-esc="madonhang"/>-->
+<!--                                    </strong>-->
+<!--                                </span>-->
+<!--                            </t>-->
+<!--                            <br/>-->
+<!--                            <t t-if="tensanpham">-->
+<!--                                <span class="text-center bold">-->
+<!--                                    <strong>Sản phẩm:-->
+<!--                                        <t t-esc="tensanpham"/>-->
+<!--                                    </strong>-->
+<!--                                </span>-->
+<!--                            </t>-->
+<!--                            <br/>-->
+<!--                        </center>-->
+<!--                        &lt;!&ndash;                        <t t-if="nhacungcap">&ndash;&gt;-->
+<!--                        &lt;!&ndash;                            <span class="text-center bold"><strong>Supplier: <t t-esc="tenkhach"/></strong></span>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                            <br/>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        </t>&ndash;&gt;-->
+<!--                    </span>-->
+                    <div>
+                        <div class="table-responsive-sm table-responsive-md responsive-1">
+                            <table class="table-bordered responsive-table-1"
+                                           style="border-collapse: collapse; border : border-box;">
+                        <thead>
+                            <tr>
+
+                                <th style="text-align:center;width :10%;background-color: #4cb1a7; color: #ffffff; border: 1px solid black;"
+                                    class="table-item">Ngày
+                                </th>
+                                <th style="text-align:center;width :10%;background-color: #4cb1a7; color: #ffffff; border: 1px solid black;"
+                                    class="table-item">Máy chạy
+                                </th>
+                                <th style="text-align:center;width :5%;background-color: #4cb1a7; color: #ffffff; border: 1px solid black;"
+                                    class="table-item">Lệnh sản xuất
+                                </th>
+                                <th style="text-align:center;width :15%;background-color: #4cb1a7; color: #ffffff; border: 1px solid black;"
+                                    class="table-item">Khách hàng
+                                </th>
+                                <th style="text-align:center;width :10%;background-color: #4cb1a7; color: #ffffff; border: 1px solid black;"
+                                    class="table-item">Số hợp đồng
+                                </th>
+                                <th style="text-align:center;width :10%;background-color: #4cb1a7; color: #ffffff; border: 1px solid black;"
+                                    class="table-item">Mã thương mại
+                                </th>
+                                <th style="text-align:center;width :10%;background-color: #4cb1a7; color: #ffffff; border: 1px solid black;"
+                                    class="table-item">Code filler
+                                </th>
+                                <th style="text-align:center;width :10%;background-color: #4cb1a7; color: #ffffff; border: 1px solid black;"
+                                    class="table-item">Khối lượng dự kiến
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="sale_tbody">
+
+                            <t t-set="group1" t-value="[]"/>
+                            <t t-foreach="docs" t-as="o">
+                                <t t-set="group1" t-value="group1+[o.ngay]"/>
+                            </t>
+
+                            <t t-set="sum1" t-value="{}"/>
+                            <t t-foreach="['khoiluong_dukien', 'thoigian_dukien']" t-as="column">
+                                <t t-set="dict_child" t-value="{}"/>
+                                <t t-foreach="set(group1)" t-as="g1">
+                                    <t t-set="dict_child" t-esc="dict_child.update({g1: 0})"/>
+                                </t>
+                                <t t-set="sum1" t-esc="sum1.update({column: dict_child})"/>
+                            </t>
+
+                            <t t-foreach="['khoiluong_dukien', 'thoigian_dukien']" t-as="column">
+                                <t t-set="dict_child" t-value="dict(sum1[column])"/>
+                                <t t-foreach="docs" t-as="o">
+                                    <t t-set="dict_child"
+                                       t-esc="dict_child.update({o.ngay: dict_child[o.ngay] + o[column]})"/>
+                                </t>
+                                <t t-set="sum1" t-esc="sum1.update({column: dict_child})"/>
+                            </t>
+
+                            <t t-set="tong" t-value="0"/>
+                            <t t-foreach="sorted(list(set(group1)))" t-as="g1">
+                                <t t-set="tong" t-value="tong + sum1['khoiluong_dukien'][g1]"/>
+
+                                <t t-set="g1rc" t-value="docs.search([('ngay', '=', g1)], limit=1)"/>
+
+                                <tr>
+                                    <td style="text-align: center; background-color: #39FE3C; color: #000000; font-weight: bolder; border: 1px solid black;">
+                                        <span
+                                                t-field="g1rc.ngay"/>
+                                    </td>
+                                    <td style="background-color: #39FE3C; color: #000000; font-weight: bolder; border: 1px solid black;"/>
+                                    <td style="background-color: #39FE3C; color: #000000; font-weight: bolder; border: 1px solid black;"/>
+                                    <td style="background-color: #39FE3C; color: #000000; font-weight: bolder; border: 1px solid black;"/>
+                                    <td style="background-color: #39FE3C; color: #000000; font-weight: bolder; border: 1px solid black;"/>
+                                    <td style="background-color: #39FE3C; color: #000000; font-weight: bolder; border: 1px solid black;"/>
+                                    <td style="background-color: #39FE3C; color: #000000; font-weight: bolder; border: 1px solid black;"/>
+                                    <td style="text-align: right; background-color: #39FE3C; color: #000000; font-weight: bolder; border: 1px solid black;">
+                                        <t
+                                                t-esc="'{0:,.3f}'.format(sum1['khoiluong_dukien'][g1]).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                    </td>
+
+                                </tr>
+                                <t t-set="doc2" t-value="docs.filtered(lambda doc: doc.ngay==g1)"/>
+
+                                <t t-set="group2" t-value="[]"/>
+                                <t t-foreach="doc2" t-as="o">
+                                    <t t-set="group2" t-value="group2+[o.kh_may_id]"/>
+                                </t>
+
+                                <t t-set="sum2" t-value="{}"/>
+                                <t t-foreach="['khoiluong_dukien', 'thoigian_dukien']" t-as="column">
+                                    <t t-set="dict_child" t-value="{}"/>
+                                    <t t-foreach="set(group2)" t-as="g2">
+                                        <t t-set="dict_child" t-esc="dict_child.update({g2: 0})"/>
+                                    </t>
+                                    <t t-set="sum2" t-esc="sum2.update({column: dict_child})"/>
+                                </t>
+
+                                <t t-foreach="['khoiluong_dukien', 'thoigian_dukien']" t-as="column">
+                                    <t t-set="dict_child" t-value="dict(sum2[column])"/>
+                                    <t t-foreach="doc2" t-as="o">
+                                        <t t-set="dict_child"
+                                           t-esc="dict_child.update({o.kh_may_id: dict_child[o.kh_may_id] + o[column]})"/>
+                                    </t>
+                                    <t t-set="sum2" t-esc="sum2.update({column: dict_child})"/>
+                                </t>
+
+                                <t t-foreach="set(group2)" t-as="g2">
+
+                                    <t t-set="g2rc"
+                                       t-value="doc2.search([('ngay', '=', g1), ('kh_may_id', '=', g2.id)], limit=1)"/>
+
+                                    <tr>
+                                        <td style="background-color: #A3FFB2; color: #000000; font-weight: bolder; font-style: italic; border: 1px solid black;"/>
+                                        <td style="text-align: center; background-color: #A3FFB2; color: #000000; font-weight: bolder; font-style: italic; border: 1px solid black;">
+                                            <span
+                                                    t-field="g2rc.kh_may_id"/>
+                                        </td>
+                                        <td style="background-color: #A3FFB2; color: #000000; font-weight: bolder; font-style: italic; border: 1px solid black;"/>
+                                        <td style="background-color: #A3FFB2; color: #000000; font-weight: bolder; font-style: italic; border: 1px solid black;"/>
+                                        <td style="background-color: #A3FFB2; color: #000000; font-weight: bolder; font-style: italic; border: 1px solid black;"/>
+                                        <td style="background-color: #A3FFB2; color: #000000; font-weight: bolder; font-style: italic; border: 1px solid black;"/>
+                                        <td style="background-color: #A3FFB2; color: #000000; font-weight: bolder; font-style: italic; border: 1px solid black;"/>
+                                        <td style="text-align: right; background-color: #A3FFB2; color: #000000; font-weight: bolder; font-style: italic; border: 1px solid black;">
+                                            <t
+                                                    t-esc="'{0:,.3f}'.format(sum2['khoiluong_dukien'][g2]).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                        </td>
+
+                                    </tr>
+
+                                    <t t-set="doc"
+                                       t-value="doc2.filtered(lambda doc: doc.ngay==g1 and doc.kh_may_id==g2)"/>
+
+                                    <t t-foreach="doc" t-as="o">
+                                        <tr>
+
+                                            <td style="background-color: False; color: #000000; border: 1px solid black;"/>
+                                            <td style="background-color: False; color: #000000; border: 1px solid black;"/>
+                                            <td style="border: 1px solid black;text-align: left; background-color: False; color: #000000; !important;">
+                                                <span t-field="o.lenhsx_ids"/>
+                                            </td>
+                                            <td style="border: 1px solid black;text-align: left; background-color: False; color: #000000; !important;">
+                                                <span t-field="o.donhang.makhach.tenkhach"/>
+                                            </td>
+                                            <td style="border: 1px solid black;text-align: left; background-color: False; color: #000000; !important;">
+                                                <span t-field="o.madonhang"/>
+                                            </td>
+                                            <td style="border: 1px solid black;text-align: center; background-color: False; color: #000000; !important;">
+                                                <span t-field="o.mathuongmaisp"/>
+                                            </td>
+                                            <td style="border: 1px solid black;text-align: center; background-color: False; color: #000000; !important;">
+                                                <span t-field="o.manoibosp"/>
+                                            </td>
+                                            <td style="border: 1px solid black;text-align: right; background-color: False; color: #000000; !important;">
+                                                <span t-esc="'{0:,.3f}'.format(o.khoiluong_dukien).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                            </td>
+
+                                        </tr>
+                                    </t>
+
+
+                                </t>
+
+                            </t>
+                            <tr>
+                                <td style="text-align: center; background-color: #39FE3C; color: #000000; font-weight: bolder; border-left: 1px solid black; border-bottom: 1px solid black;">
+                                </td>
+                                <td style="background-color: #39FE3C; color: #000000; font-weight: bolder; border-bottom: 1px solid black; "/>
+                                <td style="background-color: #39FE3C; color: #000000; font-weight: bolder; border-bottom: 1px solid black; "/>
+                                <td style="background-color: #39FE3C; color: #000000; font-weight: bolder; border-bottom: 1px solid black; ">
+                                    <span>
+                                        Tổng :
+                                    </span>
+                                </td>
+                                <td style="background-color: #39FE3C; color: #000000; font-weight: bolder; border-bottom: 1px solid black; "/>
+                                <td style="background-color: #39FE3C; color: #000000; font-weight: bolder; border-bottom: 1px solid black; "/>
+                                <td style="background-color: #39FE3C; color: #000000; font-weight: bolder; border-bottom: 1px solid black; "/>
+                                <td style="text-align: right; background-color: #39FE3C; color: #000000; font-weight: bolder; border: 1px solid black;">
+                                    <t
+                                            t-esc="'{0:,.3f}'.format(tong).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
+        

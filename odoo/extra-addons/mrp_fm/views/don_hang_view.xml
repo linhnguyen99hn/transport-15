@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Views -->
+    <record id="donhang_chitiet_form_view" model="ir.ui.view">
+        <field name="name">donhang.chitiet.form</field>
+        <field name="model">donhang.chitiet</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <field name="donhang_id" context="{'form_view_ref': 'mrp_fm.don_hang_form_view'}"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="mathuongmaisp" context="{'form_view_ref': 'mrp_fm.dm_sanpham_form_view'}"/>
+                            <field name="ngaydat"/>
+                            <field name="tonkhobotri"/>
+                        </group>
+                        <group>
+                            <field name="soluong"/>
+                            <field name="ngaygiao"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="donhang_chitiet_list_view" model="ir.ui.view">
+        <field name="name">donhang.chitiet.list</field>
+        <field name="model">donhang.chitiet</field>
+        <field name="arch" type="xml">
+            <tree string="Đơn hàng">
+                <field name="donhang_id" optional="hide"/>
+                <field name="mathuongmaisp" optional="show"/>
+                <field name="soluong" optional="show"/>
+                <field name="ngaydat" optional="show"/>
+                <field name="ngaygiao" optional="show"/>
+                <field name="tonkhobotri" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="don_hang_form_view" model="ir.ui.view">
+        <field name="name">don.hang.form</field>
+        <field name="model">don.hang</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <field name="madonhang"/>
+                        <field name="makhach"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="ngaydat"/>
+                            <!--                            <field name="phuongthucthanhtoan"/>-->
+                            <field name="mucdouutien" widget="selection"/>
+                        </group>
+                        <group>
+                            <!--                            <field name="thoihanthanhtoan"/>-->
+                            <!--                            <field name="diadiemgiao"/>-->
+                            <field name="banggia"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Đơn hàng chi tiết" name="donhangchitiet">
+                            <field name="donhangchitiet_ids" widget="one2many"
+                                   context="{'default_donhang_id': madonhang}">
+                                <tree editable="bottom">
+                                    <field name="mathuongmaisp" optional="show"/>
+                                    <field name="masx" optional="show" width="130px"/>
+                                    <field name="soluong" optional="show"/>
+                                    <field name="ngaydat" optional="show"/>
+                                    <field name="ngaygiao" optional="show"/>
+                                    <field name="tonkhobotri" optional="show"/>
+                                    <!--thêm nút cảnh xử lý chênh lệch-->
+                                    <field name="canhbao" attrs="{'invisible': [('canhbao', '=', False)],
+                                                  'readonly': True}" style="background-color: red" optional="hide"/>
+                                    <field name="chamgiaohang" attrs="{'invisible': [('canhbao', '=', False)],
+                                                  'readonly': True}" style="background-color: red; color: white"
+                                           optional="show"/>
+                                    <field name="trangthai" optional="show"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="don_hang_search_view" model="ir.ui.view">
+        <field name="name">don.hang.search</field>
+        <field name="model">don.hang</field>
+        <field name="arch" type="xml">
+            <search string="Đơn hàng">
+                <field name="madonhang"/>
+                <field name="makhach"/>
+                <field name="ngaydat"/>
+                <field name="trangthaidonhang"/>
+                <!--                <group expand="0" string="Group By">-->
+                <!--                    <filter string="Nhóm sản phẩm" name="department" context="{'group_by': 'department'}"/>-->
+                <!--                </group>-->
+            </search>
+        </field>
+    </record>
+
+    <record id="don_hang_list_view" model="ir.ui.view">
+        <field name="name">don.hang.list</field>
+        <field name="model">don.hang</field>
+        <field name="arch" type="xml">
+            <tree string="Đơn hàng">
+                <field name="madonhang" optional="show"/>
+                <field name="ngaydat" optional="show"/>
+                <field name="canhbao_badge_donhang" string="Cảnh báo" widget="html" optional="show"/>
+                <field name="canhbao" optional="hide"/>
+                <field name="trangthaidonhang" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Actions -->
+    <!-- Actions Đơn hàng-->
+    <record id="action_don_hang_form" model="ir.actions.act_window">
+        <field name="name">Đơn hàng</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">don.hang</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="don_hang_search_view"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('don_hang_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('don_hang_form_view')})]"/>
+    </record>
+
+    <record id="action_ke_hoach_san_xuat" model="ir.actions.act_window">
+        <field name="name">Gantt Chart</field>
+        <field name="res_model">donhang.chitiet</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('donhang_chitiet_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('donhang_chitiet_form_view')})]"/>
+    </record>
+
+    <!-- Top menu item -->
+    <menuitem id="don_hang_menu"
+              action="action_don_hang_form"
+              name="Đơn hàng"
+              parent="hoat_dong_menu_root"
+              sequence="1"/>
+
+    <menuitem id="ke_hoach_menu"
+              name="Kế hoạch"
+              action="action_ke_hoach_san_xuat"
+              parent="hoat_dong_menu_root"
+              sequence="2"
+              active="false"/>
+
+</odoo>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <template id="bao_cao_chi_phi_document">
+        <t t-call="web.html_container">
+            <t t-call="web.report_layout">
+                <meta charset="utf-8"/>
+                <t t-call="web.basic_layout" class="container-fluid p-0">
+                    <link rel="stylesheet" href="/base_inheritance/static/src/css/style.css"/>
+                    <style>
+                        @media only screen and (max-width: 576px) {
+                            .responsive .table {
+                                font-size: smaller;
+                                white-space: nowrap;
+                            }
+
+                            .responsive-1 .responsive-table-1 {
+                                white-space: nowrap;
+                                font-size: smaller;
+                                white-space: nowrap;
+                                min-width: 100%;
+                            }
+
+                            .responsive-table-4 {
+                                font-size: smaller;
+                                white-space: nowrap;
+                                font-size: smaller;
+                                min-width: 800px;
+                            }
+                        }
+
+                        @media only screen and (max-width: 800px) {
+                            .responsive table {
+                                font-size: smaller;
+                                white-space: nowrap;
+                            }
+
+                            .responsive-1 .responsive-table-1 {
+                                white-space: nowrap;
+                                font-size: smaller;
+                                min-width: 100%;
+                            }
+
+                            .responsive-table-4 {
+                                font-size: smaller;
+                                white-space: nowrap;
+                                font-size: smaller;
+                                min-width: 800px;
+                            }
+                        }
+
+                        @media only screen and (max-width: 990px) {
+                            .responsive table {
+                                font-size: smaller;
+                                white-space: nowrap;
+                            }
+
+                            .responsive-1 responsive-table-1 {
+                                white-space: nowrap;
+                                font-size: smaller;
+                                min-width: 100%;
+                            }
+
+                            .responsive-table-4 {
+                                font-size: smaller;
+                                white-space: nowrap;
+                                font-size: smaller;
+                                width: 100%;
+                            }
+                        }
+
+                        @media only screen and (max-width: 1200px) {
+                            .responsive table {
+                                font-size: smaller;
+                            }
+
+                            .responsive-table-4 {
+                                font-size: smaller;
+                                white-space: nowrap;
+                                font-size: smaller;
+                                width: 100%;
+                            }
+                        }
+
+                        @media only screen and (min-width: 1200px) {
+                            .responsive table {
+                                font-size: smaller;
+                            }
+
+                            .responsive-1 .responsive-table-1 {
+                                font-size: smaller;
+                                white-space: nowrap;
+                                font-size: smaller;
+                                width: 100%;
+                            }
+                        }
+
+                        @page {
+                            size: A4 portrait;
+                            margin: 20mm 10mm 20mm 10mm; /* Điều chỉnh lề trang */
+                        }
+
+                        .responsive-table-4, .responsive-table-1, .table {
+                            width: 100%; /* Đảm bảo bảng hiển thị đầy đủ chiều rộng */
+                            table-layout: fixed; /* Cố định layout của bảng */
+                        }
+
+                        tr, td, th {
+                            page-break-inside: avoid;
+                        }
+                    </style>
+                    <div class="page p-0"
+                         style="font-family :Time New Roman !important;margin-right:4%; margin-left:4%;">
+                        <div class="oe_structure"/>
+                        <div class="col-sm-12 col-md-12 p-0">
+                            <h2 style="width:100%; text-align:center;font-weight: 550;font-size: 30px;text-transform: uppercase; margin: 25px 0px;"
+                                class="text-center bold">
+                                <center>BÁO CÁO CHI PHÍ</center>
+                            </h2>
+                        </div>
+                        <div class="table-responsive-sm table-responsive-md">
+                            <t t-set="x" t-value="0"/>
+                            <t t-set="tongkhoiluongdukien" t-value="0"/>
+                            <t t-foreach="docs" t-as="l">
+                                <t t-if="l.khoiluongdukien>0" >
+                                    <t t-set="x" t-value="x+1"/>
+                                    <t t-set="tongkhoiluongdukien" t-value="tongkhoiluongdukien + l.khoiluongdukien"/>
+                                </t>
+                            </t>
+                            <t t-set="khoiluongdukien" t-value="tongkhoiluongdukien/x"/>
+                            <table class="responsive-table-4"
+                                   style="table-layout: fixed; font-family : Time New Roman; margin: 30px 0px;  width: 100%;">
+                                <tr>
+                                    <th style="text-align: left; padding: 0rem;">
+                                        <span class="text-center bold"><strong>Lệnh số: <t
+                                                t-esc="lenhsx"/></strong></span>
+                                        <br/>
+                                        <span class="text-center bold"><strong>Mã sản xuất: <t
+                                                t-esc="manoibo"/></strong></span>
+                                        <br/>
+                                        <span class="text-center bold" style="text-align : right;"><strong>Khối lượng dự
+                                            kiến: <t
+                                                    t-esc="'{0:,.3f}'.format(khoiluongdukien).replace('.', ' ').replace(',', '.').replace(' ', ',')"/></strong></span>
+                                    </th>
+
+                                    <th style="text-align: left; padding: 0rem;">
+                                        <span class="text-center bold"><strong>Máy số: <t
+                                                t-esc="mamay"/></strong></span>
+                                        <br/>
+                                        <span class="text-center bold"><strong>Ngày sản xuất:</strong></span>
+                                        <br/>
+                                        <span class="text-center bold"><strong>Ngày hoàn thành:</strong></span>
+                                    </th>
+
+                                    <th style="text-align: left; padding: 0rem;">
+                                        <span class="text-center bold"><strong>Khối lượng 1 mẻ: <t
+                                                t-esc="khoiluong1me"/></strong></span>
+                                        <br/>
+                                        <span class="text-center bold"><strong>Tổng số mẻ: <t
+                                                t-esc="soluongme"/></strong></span>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <div class="table-responsive-sm table-responsive-md responsive-1">
+                                <table class="table-bordered responsive-table-1"
+                                           style="border-collapse: collapse; border : border-box;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width :3%;background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">STT.</th>
+                                             <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Mã nguyên liệu</th>
+                                            <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Tên Nguyên liệu</th>
+                                             <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">ĐVT</th>
+                                            <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Khối lượng</th>
+                                             <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Đơn giá</th>
+                                            <th style="background-color: #4cb1a7; color: #ffffff; border: 1px solid black; padding : 8px;border: 1px solid black;border: 1px solid black;"
+                                                class="text-center">Chi phí</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody class="sale_tbody">
+                                        <t t-set="i" t-value="1"/>
+                                        <t t-set="tongchiphi" t-value="0"/>
+                                        <t t-foreach="docs" t-as="t">
+                                            <t t-if="l.khoiluongdukien>0" >
+                                                <t t-set="tongchiphi" t-value="tongchiphi + (t.khoiluong * tongmesx * t.dongia)"/>
+                                            </t>
+                                            <t t-if="l.khoiluongdukien==0" >
+                                                <t t-set="tongchiphi" t-value="tongchiphi + (t.khoiluong * t.dongia)"/>
+                                            </t>
+                                            <t t-set="tongdongia" t-value="sum((item.dongia for item in t))"/>
+                                        </t>
+                                        <tr>
+                                            <td colspan="3" style="text-align: center;padding : 8px;border: 1px solid black;">
+                                                <strong><span>Tổng khối lượng</span></strong>
+                                            </td>
+                                            <td style="text-align: right;padding : 8px;border: 1px solid black;">
+                                            </td>
+                                            <td style="text-align: right;padding : 8px;border: 1px solid black;">
+                                                <strong><span
+                                                        t-esc="'{0:,.3f}'.format(tongnguyenlieucap).replace('.', ' ').replace(',', '.').replace(' ', ',')"/></strong>
+                                            </td>
+
+                                            <td style="text-align: right;padding : 8px;border: 1px solid black;">
+                                            </td>
+
+                                            <td style="text-align: right;padding : 8px;border: 1px solid black;">
+                                                <strong><span
+                                                        t-esc="'{0:,.3f}'.format(tongchiphi).replace('.', ' ').replace(',', '.').replace(' ', ',')"/></strong>
+                                            </td>
+                                        </tr>
+                                        <t t-foreach="docs" t-as="o">
+                                            <tr>
+                                                <td style="text-align: center;padding : 8px;border: 1px solid black;">
+                                                    <span t-esc="i"/>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </td>
+                                                <td style="text-align: left;padding : 8px;border: 1px solid black;">
+                                                    <span t-esc="o.manguyenlieu"/>
+                                                </td>
+                                                <td style="text-align: left;padding : 8px;border: 1px solid black;">
+                                                    <span t-esc="o.tennguyenlieu"/>
+                                                </td>
+                                                <td style="text-align: left;padding : 8px;border: 1px solid black;">
+                                                    <span t-esc="o.donvitinh"/>
+                                                </td>
+                                                <td style="text-align: right;padding : 8px;border: 1px solid black;">
+                                                    <t t-if="o.khoiluongdukien>0">
+                                                        <span t-esc="'{0:,.3f}'.format(o.khoiluong * tongmesx).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                                    </t>
+                                                    <t t-if="o.khoiluongdukien==0">
+                                                        <span t-esc="'{0:,.3f}'.format(o.khoiluong).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                                    </t>
+                                                </td>
+                                                 <td style="text-align: right;padding : 8px;border: 1px solid black;">
+                                                    <span t-esc="'{0:,.3f}'.format(o.dongia).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                                </td>
+                                                <td style="text-align: right;padding : 8px;border: 1px solid black;">
+                                                    <t t-if="o.khoiluongdukien>0">
+                                                        <span t-esc="'{0:,.3f}'.format(o.khoiluong * tongmesx * o.dongia).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                                    </t>
+                                                    <t t-if="o.khoiluongdukien==0">
+                                                        <span t-esc="'{0:,.3f}'.format(o.khoiluong * o.dongia).replace('.', ' ').replace(',', '.').replace(' ', ',')"/>
+                                                    </t>
+                                                </td>
+
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="oe_structure"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

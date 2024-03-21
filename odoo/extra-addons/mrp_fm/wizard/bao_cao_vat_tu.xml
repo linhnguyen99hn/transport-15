@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="bao_cao_vat_tu_view" model="ir.ui.view">
+        <field name="name">bao.cao.vat.tu.form</field>
+        <field name="model">bao.cao.vat.tu</field>
+        <field name="arch" type="xml">
+            <form create="false" string="Báo cáo vật tư">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_start" string="Từ ngày" widget="date"/>
+                            <field name="vattu_id" string="Mã vật tư" widget="many2one"/>
+                        </group>
+                        <group>
+                            <field name="date_end" string="Đến ngày" widget="date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="get_report" type="object" string="Lập báo cáo" class="oe_highlight"/>
+                        <button string="Hủy" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="bao_cao_vat_tu_form" model="ir.actions.act_window">
+        <field name="name">Báo cáo vật tư</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bao.cao.vat.tu</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bao_cao_vat_tu_view"/>
+    </record>
+
+    <menuitem id="bao_cao_vat_tu_menu"
+              action="bao_cao_vat_tu_form"
+              name="Báo cáo vật tư"
+              parent="bao_cao_menu_root"
+              sequence="11"/>
+
+    <data>
+        <record id="bao_cao_vat_tu" model="ir.actions.report">
+            <field name="name">Báo cáo vật tư</field>
+            <field name="model">bao.cao.vat.tu</field>
+            <field name="report_type">qweb-html</field>
+            <field name="paperformat_id" ref="fm_paper_format"/>
+            <field name="report_name">mrp_fm.bao_cao_vat_tu_document</field>
+            <field name="report_file">mrp_fm.bao_cao_vat_tu_document</field>
+            <field name="print_report_name">Báo
+            cáo
+            vật
+            tư</field>
+            <field name="binding_model_id" ref="model_report_mrp_fm_bao_cao_vat_tu_document"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

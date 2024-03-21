@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="bang_gia_form_view" model="ir.ui.view">
+        <field name="name">bang.gia.form</field>
+        <field name="model">bang.gia</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <field name="ten" style="width: 15cm;"/>
+                        <field name="tungay" style="width: 5cm;"/>
+                        <field name="denngay" style="width: 5cm;"/>
+                    </group>
+                    <notebook>
+                        <page id="gianguyenlieu" name="gianguyenlieu"
+                              string="Giá nguyên liệu chi tiết">
+                            <field name="gianguyenlieu" widget="one2many">
+                                <tree editable="bottom">
+                                    <field name="manguyelieu"/>
+                                    <field name="nguyenlieu" optional="show"/>
+                                    <field name="donvitinh"/>
+                                    <field name="dongia" optional="show"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="bang_gia_search_view" model="ir.ui.view">
+        <field name="name">bang.gia.search</field>
+        <field name="model">bang.gia</field>
+        <field name="arch" type="xml">
+            <search string="Bảng giá">
+                <field name="ten"/>
+                <field name="tungay"/>
+                <field name="denngay"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="bang_gia_list_view" model="ir.ui.view">
+        <field name="name">bang.gia.list</field>
+        <field name="model">bang.gia</field>
+        <field name="arch" type="xml">
+            <tree string="Bảng giá">
+                <field name="ten" optional="show"/>
+                <field name="tungay" optional="show"/>
+                <field name="denngay" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    action-->
+    <record id="action_bang_gia_form" model="ir.actions.act_window">
+        <field name="name">Bảng giá</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bang.gia</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="bang_gia_search_view"/>
+        <field name="view_id" ref="bang_gia_list_view"/>
+    </record>
+
+    <!--    menu-->
+    <menuitem id="bang_gia_menu_root"
+              name="Bảng giá"
+              parent="mrp_fm_menu_root"
+              sequence="4"/>
+    <menuitem id="bang_gia_nguyen_lieu_menu_root"
+              name="Bảng giá nguyên liệu"
+              action="mrp_fm.action_bang_gia_form"
+              parent="bang_gia_menu_root"
+              sequence="1"/>
+
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_bao_cao_san_pham" model="ir.actions.report">
+            <field name="name">Thông tin sản phẩm</field>
+            <field name="model">dm.sanpham</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">mrp_fm.bao_cao_thong_tin_sp_document</field>
+            <field name="report_file">mrp_fm.bao_cao_thong_tin_sp_document</field>
+            <field name="print_report_name">Thông tin sản phẩm</field>
+            <field name="binding_model_id" ref="model_dm_sanpham"/>
+            <field name="binding_type">report</field>
+        </record>
+        <template id="id_bao_cao_thong_tin_sp">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="mrp_fm.bao_cao_thong_tin_sp_document"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
