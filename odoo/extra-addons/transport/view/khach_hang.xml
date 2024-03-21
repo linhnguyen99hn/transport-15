@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Views -->
+    <record id="khach_hang_form_view" model="ir.ui.view">
+        <field name="name">khach.hang.form</field>
+        <field name="model">khach.hang</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="hoten"/>
+                        </group>
+                        <group>
+                            <field name="sodienthoai"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="diachi"/>
+                        </group>
+                        <group>
+                            <field name="ghichu"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page id="makhachhang_ids" name="makhachhang_ids"
+                              string="Mã khách hàng">
+                            <field name="makhachhang_ids" widget="one2many">
+                                <tree editable="bottom">
+                                    <field name="makhachhang" optional="show"/>
+                                    <field name="dongia" optional="show"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="khach_hang_search_view" model="ir.ui.view">
+        <field name="name">bang.gia.search</field>
+        <field name="model">khach.hang</field>
+        <field name="arch" type="xml">
+            <search string="Khách hàng">
+                <field name="hoten"/>
+                <field name="sodienthoai"/>
+                <field name="diachi"/>
+                <field name="ghichu"/>
+            </search>
+        </field>
+    </record>
+    <record id="khach_hang_list_view" model="ir.ui.view">
+        <field name="name">khach.hang.list</field>
+        <field name="model">khach.hang</field>
+        <field name="arch" type="xml">
+            <tree string="Khách hàng">
+                <field name="hoten" optional="show"/>
+                <field name="makhachhang_ids" optional="show" widget="one2many"/>
+                <field name="sodienthoai" optional="show"/>
+                <field name="diachi" optional="show"/>
+                <field name="ghichu" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Actions -->
+
+    <record id="action_khach_hang_form" model="ir.actions.act_window">
+        <field name="name">Khách hàng</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">khach.hang</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="khach_hang_search_view"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('khach_hang_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('khach_hang_form_view')})]"/>
+    </record>
+
+
+    <!--menu item -->
+
+    <menuitem id="khach_hang_menu"
+              action="action_khach_hang_form"
+              name="Danh sách Khách hàng"
+              parent="transport.transport_menu_root"
+              sequence="3"/>
+
+
+</odoo>

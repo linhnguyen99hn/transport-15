@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="transport_menu_root"
+              name="Transport"
+              web_icon="transport,static/description/Screenshot 2024-03-20 153303.png"
+              sequence="255"/>
+
+
+</odoo>

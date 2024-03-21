@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Views -->
+    <record id="tien_trinh_form_view" model="ir.ui.view">
+        <field name="name">tien.trinh.form</field>
+        <field name="model">tien.trinh</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <group>
+                            <label for="doitac" string="Tiến trình"/>
+                            <h1><field name="doitac" placeholder="Họ và tên" /></h1>
+                        </group>
+                        <group>
+                            <field name="malo"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="ngaybatdau"/>
+                        </group>
+                        <group>
+                            <field name="ngayketthuc" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+
+                        </group>
+                        <group>
+                            <field name="ghichu" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="tien_trinh_search_view" model="ir.ui.view">
+        <field name="name">bang.gia.search</field>
+        <field name="model">tien.trinh</field>
+        <field name="arch" type="xml">
+            <search string="Tiến trình">
+                <field name="doitac"/>
+                <field name="malo"/>
+                <field name="ngaybatdau"/>
+                <field name="ngayketthuc"/>
+                <field name="ghichu"/>
+            </search>
+        </field>
+    </record>
+    <record id="tien_trinh_list_view" model="ir.ui.view">
+        <field name="name">tien.trinh.list</field>
+        <field name="model">tien.trinh</field>
+        <field name="arch" type="xml">
+            <tree string="Tiến trình">
+                <field name="doitac" optional="show"/>
+                <field name="malo" optional="show"/>
+                <field name="ngaybatdau" optional="show"/>
+                <field name="ngayketthuc" optional="show"/>
+                <field name="ghichu" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Actions -->
+    <!-- Actions Quy cách-->
+
+    <record id="action_tien_trinh_form" model="ir.actions.act_window">
+        <field name="name">Tiến trình</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tien.trinh</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="tien_trinh_search_view"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('tien_trinh_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('tien_trinh_form_view')})]"/>
+    </record>
+
+
+    <!--menu item -->
+
+    <menuitem id="tien_trinh_menu"
+              action="action_tien_trinh_form"
+              name="Tiến trình"
+              parent="transport.transport_menu_root"
+              sequence="2"/>
+
+
+</odoo>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Views -->
+    <record id="bao_hang_form_view" model="ir.ui.view">
+        <field name="name">bao.hang.form</field>
+        <field name="model">bao.hang</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="khachhang"/>
+                        </group>
+                        <group>
+                            <field name="makhachhang"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="ngayphat" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="khovanchuyen" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="loaihanghoa" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="mahanghoa" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="khophat" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="dongiakhovc" string="Đơn giá kho VC"/>
+                        </group>
+                        <group>
+                            <field name="thanhtienkhovc" string="Thành tiền kho VC"/>
+                        </group>
+                        <group>
+                            <field name="ngaynhan"/>
+                        </group>
+                        <group>
+                            <field name="ngaygiao"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="malo"/>
+                        </group>
+                        <group>
+                            <field name="socan"/>
+                        </group>
+                        <group>
+                            <field name="thanhtiendoitac"/>
+                        </group>
+                        <group>
+                            <field name="ghichu"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="bao_hang_search_view" model="ir.ui.view">
+        <field name="name">bang.gia.search</field>
+        <field name="model">bao.hang</field>
+        <field name="arch" type="xml">
+            <search string="Bao hàng">
+                <field name="ngaynhan"/>
+                <field name="ngaygiao"/>
+                <field name="loaihanghoa"/>
+                <field name="khovanchuyen"/>
+                <field name="khachhang"/>
+            </search>
+        </field>
+    </record>
+    <record id="bao_hang_list_view" model="ir.ui.view">
+        <field name="name">bao.hang.list</field>
+        <field name="model">bao.hang</field>
+        <field name="arch" type="xml">
+            <tree string="Transport">
+                <field name="khachhang" optional="show"/>
+                <field name="makhachhang" optional="show"/>
+                <field name="ngayphat" optional="show"/>
+                <field name="khovanchuyen" optional="show"/>
+                <field name="loaihanghoa" optional="show"/>
+                <field name="mahanghoa" optional="show"/>
+                <field name="khophat" optional="show"/>
+                <field name="dongiakhovc" optional="show"/>
+                <field name="thanhtienkhovc" optional="show"/>
+                <field name="ngaynhan" optional="show"/>
+                <field name="ngaygiao" optional="show"/>
+                <field name="malo" optional="show"/>
+                <field name="socan" optional="show"/>
+                <!--                <field name="tientrinh" widget="many2many_tags" optional="show"/>-->
+                <field name="thanhtiendoitac" optional="show"/>
+                <field name="ghichu" optional="show"/>
+                <!--                <group expand="0" string="Group By">-->
+                <!--                    <filter string="Nhóm quy cách" name="department" context="{'group_by': 'department'}"/>-->
+                <!--                </group>-->
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Actions -->
+    <!-- Actions Quy cách-->
+
+    <record id="action_bao_hang_form" model="ir.actions.act_window">
+        <field name="name">Bao hàng</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bao.hang</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="bao_hang_search_view"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('bao_hang_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('bao_hang_form_view')})]"/>
+    </record>
+
+
+    <!--menu item -->
+
+    <menuitem id="bao_hang_menu"
+              action="action_bao_hang_form"
+              name="Danh sách bao hàng"
+              parent="transport.transport_menu_root"
+              sequence="1"/>
+
+
+</odoo>
