@@ -71,12 +71,15 @@
         <field name="name">bang.gia.search</field>
         <field name="model">bao.hang</field>
         <field name="arch" type="xml">
-            <search string="Bao hàng">
+            <search string="Danh sách bao hàng">
                 <field name="ngaynhan"/>
                 <field name="ngaygiao"/>
                 <field name="loaihanghoa"/>
                 <field name="khovanchuyen"/>
                 <field name="khachhang"/>
+                <!--                <group expand="0" string="Group By">-->
+                <!--                    <filter string="Nhóm quy cách" name="department" context="{'group_by': 'department'}"/>-->
+                <!--                </group>-->
             </search>
         </field>
     </record>
@@ -101,9 +104,7 @@
                 <!--                <field name="tientrinh" widget="many2many_tags" optional="show"/>-->
                 <field name="thanhtiendoitac" optional="show"/>
                 <field name="ghichu" optional="show"/>
-                <!--                <group expand="0" string="Group By">-->
-                <!--                    <filter string="Nhóm quy cách" name="department" context="{'group_by': 'department'}"/>-->
-                <!--                </group>-->
+
             </tree>
         </field>
     </record>
@@ -113,7 +114,7 @@
     <!-- Actions Quy cách-->
 
     <record id="action_bao_hang_form" model="ir.actions.act_window">
-        <field name="name">Bao hàng</field>
+        <field name="name">Danh sách bao hàng</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">bao.hang</field>
         <field name="view_mode">tree,form,kanban</field>
